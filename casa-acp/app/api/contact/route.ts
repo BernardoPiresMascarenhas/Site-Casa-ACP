@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       from: "Acme <onboarding@resend.dev>",
       
       // Coloque aqui o e-mail de vocês que VAI RECEBER as mensagens do formulário
-      to: ["contato@casaacp.com.br"], 
+      to: ["contatocasaacp@gmail.com"], 
       
       subject: `Nova mensagem pelo site: ${assunto}`,
       

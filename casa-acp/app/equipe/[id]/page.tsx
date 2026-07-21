@@ -12,10 +12,10 @@ const EQUIPE_DETALHES = {
     nome: "Dalissa Vieira Teixeira",
     crp: "CRP 04/49035",
     foto: "/dalissa.jpeg",
-    whatsapp: "5531999999999", 
-    instagram: "https://instagram.com/dalissavieira", 
-    endereco: "Av. do Contorno, 1234 - Savassi, Belo Horizonte - MG",
-    mapaUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1500!2d-43.93!3d-19.93!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDU1JzQ4LjAiUyA0M8KwNTUnNDguMCJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000",
+    whatsapp: "5531994437456", 
+    instagram: "https://instagram.com/dalissa.psi", 
+    endereco: "Rua Barão de Macaúbas, 460 - Sala 1604, Santo Antônio, Belo Horizonte - MG (CEP: 30350-090)",
+    mapaUrl: "https://maps.google.com/maps?q=Rua+Barao+de+Macaubas,+460+-+Santo+Antonio,+Belo+Horizonte+-+MG&t=&z=16&ie=UTF8&iwloc=&output=embed",
     bio: [
       "Psicóloga clínica, psicoterapeuta e plantonista.",
       "Especialista em Psicologia Clínica pela Universidade Federal de Minas Gerais (UFMG) e em Saúde do Idoso pela Pontifícia Universidade Católica do Paraná (PUC-PR).",
@@ -28,10 +28,10 @@ const EQUIPE_DETALHES = {
     nome: "Eveline Alves de Abreu",
     crp: "CRP 04/5824",
     foto: "/Eveline2.jpeg",
-    whatsapp: "5531999999999",
-    instagram: "https://instagram.com/eveline",
-    endereco: "Rua Exemplo, 456 - Funcionários, Belo Horizonte - MG",
-    mapaUrl: "", 
+    whatsapp: "5531998341105",
+    instagram: "https://instagram.com/evelinealvespsi",
+    endereco: "Rua Progresso, 1272 - Sala 106, Padre Eustáquio, Belo Horizonte - MG (CEP: 30720-320)",
+    mapaUrl: "https://maps.google.com/maps?q=Rua+Progresso,+1272+-+Padre+Eustaquio,+Belo+Horizonte+-+MG&t=&z=16&ie=UTF8&iwloc=&output=embed", 
     bio: [
       "Psicóloga Clínica, Psicoterapeuta e Plantonista.",
       "Graduanda na Pós-Graduação em Fenomenologia, Psicopatologia e Saúde Mental no Instituto Sapientia Cordis.",
@@ -44,10 +44,10 @@ const EQUIPE_DETALHES = {
     nome: "Lilian Maria Ribeiro Tarabal Silva",
     crp: "CRP 04/47161",
     foto: "/lilian.jpeg",
-    whatsapp: "5531999999999",
-    instagram: "https://instagram.com/lilian",
-    endereco: "Rua Modelo, 789 - Lourdes, Belo Horizonte - MG",
-    mapaUrl: "", 
+    whatsapp: "5531993059596",
+    instagram: "", 
+    endereco: "Rua Rodrigues Caldas, 726 - Sala 1210, Santo Agostinho, Belo Horizonte - MG (CEP: 30190-120)",
+    mapaUrl: "https://maps.google.com/maps?q=Rua+Rodrigues+Caldas,+726+-+Santo+Agostinho,+Belo+Horizonte+-+MG&t=&z=16&ie=UTF8&iwloc=&output=embed", 
     bio: [
       "Psicóloga, palestrante e psicoterapeuta de Crianças e Adultos.",
       "Especialista em Fenomenologia e Saúde Mental pela FCMMG. Possui formação em Psicoterapia Centrada no Cliente e em Ludoterapia pelo CPHMINAS.",
@@ -55,15 +55,17 @@ const EQUIPE_DETALHES = {
     ]
   },
   hanna: {
-    nome: "Hanna",
-    crp: "CRP 04/·····",
+    nome: "Hanna Luiza Oliveira Santos Nonato",
+    crp: "CRP 04/51491",
     foto: "/hanna.jpeg",
-    whatsapp: "5531999999999",
-    instagram: "https://instagram.com/hanna",
-    endereco: "Endereço da Hanna",
-    mapaUrl: "",
+    whatsapp: "5531987848320",
+    instagram: "https://instagram.com/hannasantospsi",
+    endereco: "Rua Dr. Jarbas Vidal Gomes, 30 - Sala 813, Cidade Nova, Belo Horizonte - MG (CEP: 31700-070)",
+    mapaUrl: "https://maps.google.com/maps?q=Rua+Dr.+Jarbas+Vidal+Gomes,+30+-+Cidade+Nova,+Belo+Horizonte+-+MG&t=&z=16&ie=UTF8&iwloc=&output=embed",
     bio: [
-      "Breve biografia em construção..."
+      "Psicóloga clínica, plantonista e psicoterapeuta de crianças, adolescentes e adultos.",
+      "Graduada em Psicologia pela Faculdade Pitágoras (MG), com formação em Psicoterapia Centrada no Cliente pelo CPHMINAS, MBA em Psicologia Organizacional e Liderança Estratégica pela UNA e especialização em Neurociência e Educação pela UNOPAR.",
+      "Atua como palestrante e tem experiência nas áreas de Psicologia Clínica e Educacional, com foco na Abordagem Centrada na Pessoa, Plantão Psicológico, universo da criança e do adolescente, lutos não reconhecidos na perinatalidade e imagem feminina."
     ]
   }
 };
@@ -83,7 +85,7 @@ export default function PerfilProfissionalPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white pt-32 pb-24">
+    <main className="min-h-screen bg-white pt-40 pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         
         {/* Botão Voltar */}

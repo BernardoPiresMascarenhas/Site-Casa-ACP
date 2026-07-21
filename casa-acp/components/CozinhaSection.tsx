@@ -3,46 +3,12 @@
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { ARTIGOS, nomesAutores } from "@/lib/cozinhaLiteraria";
 
-type Post = {
-  id: string;
-  categoria: string;
-  titulo: string;
-  resumo: string;
-  linkTexto: string;
-  slug: string;
-};
-
-// Aqui ficam os 3 posts de destaque (podem ser os mais recentes no futuro)
-const POSTS: Post[] = [
-  {
-    id: "1",
-    categoria: "Reflexão",
-    titulo: "Há casas que começam antes de terem portas abertas",
-    resumo:
-      "Elas primeiro se abrem por dentro. Começam como desejo de encontros verdadeiros, de cuidar, compartilhar e nutrir.",
-    linkTexto: "Ler reflexão",
-    slug: "casas-que-comecam-antes",
-  },
-  {
-    id: "2",
-    categoria: "ACP",
-    titulo: "A relação como solo fértil",
-    resumo:
-      "Na ACP, a relação é onde a pessoa — sentindo-se acolhida — pode se aproximar mais de si mesma.",
-    linkTexto: "Ler artigo",
-    slug: "a-relacao-como-solo-fertil",
-  },
-  {
-    id: "3",
-    categoria: "Leitura",
-    titulo: "Tornar-se Pessoa — Carl Rogers",
-    resumo:
-      "Uma das obras fundantes da psicologia humanista. O livro que nos ensina a escuta que desejamos cultivar aqui.",
-    linkTexto: "Ver indicação",
-    slug: "tornar-se-pessoa-carl-rogers",
-  },
-];
+// Por enquanto mostra os 3 primeiros artigos; quando houver textos de outras psicólogas,
+// trocar por uma seleção manual (um de cada autora).
+const POSTS = ARTIGOS.slice(0, 3);
+const LINK_TEXTOS = ["Ler texto", "Ler artigo", "Ver reflexão"];
 
 // Orquestração das animações
 const containerVariants: Variants = {
@@ -94,11 +60,11 @@ export default function CozinhaSection() {
           viewport={{ once: true, amount: 0.1 }}
           className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3"
         >
-          {POSTS.map((post) => (
+          {POSTS.map((post, index) => (
             <motion.div key={post.id} variants={itemVariants} className="h-full">
               <Link
-                href={`/cozinha-literaria/${post.slug}`}
-                className="group flex h-full flex-col justify-between rounded-2xl bg-creme p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-terracota"
+                href={`/comodos/cozinha-literaria/${post.id}`} // Direciona direto para o texto do artigo
+                className="group flex h-full flex-col justify-between rounded-2xl bg-creme p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-terracota border-t-4 border-transparent hover:border-terracota"
               >
                 {/* Categoria e Título */}
                 <div>
@@ -113,17 +79,22 @@ export default function CozinhaSection() {
                   </p>
                 </div>
 
-                {/* Call to Action (Link) */}
-                <div className="mt-10 flex items-center gap-2 font-lato text-sm font-medium text-terracota">
-                  <span>{post.linkTexto}</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                {/* Autora e Call to Action */}
+                <div className="mt-10 flex items-center justify-between">
+                  <span className="font-playfair text-sm italic text-marrom/60">
+                    Por {nomesAutores(post)}
+                  </span>
+                  <div className="flex items-center gap-2 font-lato text-sm font-medium text-terracota">
+                    <span>{LINK_TEXTOS[index % LINK_TEXTOS.length]}</span>
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
                 </div>
               </Link>
             </motion.div>
           ))}
         </motion.div>
         
-        {/* Botão para ver todos os posts (opcional, leva para a página principal da Cozinha) */}
+        {/* Botão para ver todos os posts (leva para a página principal da Cozinha) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +103,7 @@ export default function CozinhaSection() {
           className="mt-16 flex justify-center"
         >
           <Link
-            href="/cozinha-literaria"
+            href="/comodos/cozinha-literaria"
             className="inline-flex items-center justify-center rounded-full border border-terracota/40 bg-transparent px-8 py-3.5 font-lato text-sm font-medium text-terracota transition-all duration-300 hover:-translate-y-1 hover:border-terracota hover:bg-terracota/5 hover:shadow-sm"
           >
             Ver todos os textos

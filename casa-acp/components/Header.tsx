@@ -7,12 +7,19 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const navLinks = [
+interface NavLink {
+  id: string;
+  label: string;
+  isRoute: boolean;
+  path?: string;
+}
+
+const navLinks: NavLink[] = [
   { id: "chao-da-casa", label: "Chão", isRoute: false },
   { id: "comodos", label: "Cômodos", isRoute: false },
   { id: "equipe", label: "Sala de Estar", isRoute: false },
-  { id: "cozinha-literaria", label: "Cozinha Literária", isRoute: false }, 
-  { id: "varanda", label: "Varanda", isRoute: false }, 
+  { id: "cozinha-literaria", label: "Cozinha Literária", isRoute: false },
+  { id: "varanda", label: "Varanda", isRoute: false },
   { id: "contato", label: "Contato", isRoute: false },
 ];
 
@@ -23,6 +30,9 @@ const Header = () => {
   
   const pathname = usePathname();
   const router = useRouter();
+  const isHome = pathname === "/";
+  const isSolid = scrolled || !isHome;
+
 
   useEffect(() => {
     const onScroll = () => {
@@ -89,7 +99,7 @@ const Header = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          isSolid
             ? "bg-creme/90 backdrop-blur-xl shadow-sm border-b border-marrom/10"
             : "bg-transparent border-b border-transparent"
         }`}

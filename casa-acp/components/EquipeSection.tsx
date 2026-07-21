@@ -30,8 +30,8 @@ const EQUIPE: Profissional[] = [
   {
     id: "hanna",
     nome: "Hanna",
-    crp: "CRP 04/·····",
-    areas: ["Psicóloga · ACP", "Clínica e Comunidade"],
+    crp: "CRP 04/51491",
+    areas: ["Psicologia Clínica · ACP", "Infância, Adolescência e Adultos"],
     foto: "/hanna.jpeg",
   },
   {
@@ -63,7 +63,7 @@ const item: Variants = {
 
 export default function EquipeSection() {
   return (
-    <section id="equipe" className="bg-white">
+    <section id="equipe" className="bg-creme">
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
         
         {/* ── Cabeçalho centralizado ── */}

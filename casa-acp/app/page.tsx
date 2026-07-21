@@ -21,7 +21,6 @@ export default function Home() {
         <CozinhaSection />
         <VarandaSection />
         <ContatoSection />
-        <Footer />
         <WhatsAppButton />
       </main>
     </>
