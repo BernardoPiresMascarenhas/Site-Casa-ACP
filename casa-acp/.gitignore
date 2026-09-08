@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pacotes de deploy (contem .env.local com a chave da API)
+*.zip
