@@ -6,6 +6,9 @@ export interface Curso {
   psicologa: string;
   descricao: string;
   link: string;
+  // Texto do botão, quando "Acessar curso" não descreve o destino do link
+  // (ex.: um formulário de interesse para uma turma ainda em formação).
+  linkLabel?: string;
 }
 
 export interface EdicaoPassada {

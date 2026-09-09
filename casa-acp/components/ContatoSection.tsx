@@ -8,6 +8,7 @@ export default function ContatoSection() {
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
+    telefone: "",
     assunto: "Atendimento psicológico",
     mensagem: "",
   });
@@ -24,7 +25,7 @@ export default function ContatoSection() {
     setStatus("loading");
 
     try {
-      // Aqui chamaremos a rota da API do Next.js que usará o Resend
+      // Ajustado o endpoint para /api/contato
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -33,7 +34,7 @@ export default function ContatoSection() {
 
       if (response.ok) {
         setStatus("success");
-        setFormData({ nome: "", email: "", assunto: "Atendimento psicológico", mensagem: "" });
+        setFormData({ nome: "", email: "", telefone: "", assunto: "Atendimento psicológico", mensagem: "" });
         // Retorna ao estado normal após 5 segundos
         setTimeout(() => setStatus("idle"), 5000);
       } else {
@@ -168,6 +169,22 @@ export default function ContatoSection() {
                   />
                 </div>
 
+                {/* Telefone */}
+                <div className="flex flex-col space-y-2">
+                  <label htmlFor="telefone" className="font-lato text-sm font-medium text-marrom/80">
+                    Telefone
+                  </label>
+                  <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="(00) 00000-0000"
+                    value={formData.telefone}
+                    onChange={handleChange}
+                    className="rounded-xl border border-marrom/10 bg-white/50 px-4 py-3.5 font-lato text-marrom placeholder:text-marrom/30 focus:border-terracota focus:outline-none focus:ring-1 focus:ring-terracota"
+                  />
+                </div>
+
                 {/* Assunto */}
                 <div className="flex flex-col space-y-2">
                   <label htmlFor="assunto" className="font-lato text-sm font-medium text-marrom/80">
@@ -183,7 +200,6 @@ export default function ContatoSection() {
                     <option value="Atendimento psicológico">Atendimento psicológico</option>
                     <option value="Formação e cursos">Formação e cursos</option>
                     <option value="Plantão psicológico">Plantão psicológico</option>
-                    <option value="Quarto de Hóspedes">Quarto de Hóspedes</option>
                     <option value="Outro">Outro</option>
                   </select>
                 </div>

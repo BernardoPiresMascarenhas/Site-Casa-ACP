@@ -26,9 +26,54 @@ const lato = Lato({
   display: "swap",
 });
 
+const DESCRICAO =
+  "Um espaço para pensar, encontrar e acolher a vida. Inspirada na Abordagem " +
+  "Centrada na Pessoa, a Casa ACP reúne clínica, formação e encontro em Belo Horizonte.";
+
 export const metadata: Metadata = {
-  title: "Casa ACP",
-  description: "Um espaço para pensar, encontrar e acolher a vida.",
+  // Base para transformar os caminhos relativos abaixo em URLs absolutas —
+  // WhatsApp, Facebook e LinkedIn exigem URL absoluta na imagem de preview.
+  metadataBase: new URL("https://casaacp.com.br"),
+
+  title: {
+    default: "Casa ACP",
+    template: "%s · Casa ACP",
+  },
+  description: DESCRICAO,
+  alternates: {
+    canonical: "/",
+  },
+
+  // Preview ao compartilhar o link (WhatsApp, Instagram, Facebook, LinkedIn…)
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "/",
+    siteName: "Casa ACP",
+    title: "Casa ACP — Clínica, Formação e Encontro",
+    description: DESCRICAO,
+    // PNG sem perdas, 1200x630: WhatsApp e Facebook ignoram previews em WebP.
+    // Gerada a partir da logo (public/logocomfundo.webp), centralizada sobre o creme do fundo.
+    images: [
+      {
+        url: "/og-casa-acp-logo.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "Casa ACP — um espaço para pensar, encontrar e acolher a vida.",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Casa ACP — Clínica, Formação e Encontro",
+    description: DESCRICAO,
+    images: ["/og-casa-acp-logo.png"],
+  },
+
+  // O favicon e os ícones vêm das convenções de arquivo do App Router:
+  // app/favicon.ico, app/icon.png e app/apple-icon.png.
 };
 
 export default function RootLayout({

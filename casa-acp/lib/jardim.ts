@@ -42,11 +42,11 @@ export const TOPICOS_JARDIM: TopicoJardim[] = [
   },
   {
     slug: "acoes-comunitarias",
-    titulo: "Ações Comunitárias",
+    titulo: "Ações Coletivas",
     resumo:
       "Iniciativas que levam a Psicologia Humanista e a Abordagem Centrada na Pessoa para diferentes contextos, promovendo cuidado, diálogo e presença em parceria com instituições, grupos e comunidades.",
     descricaoCompleta:
-      "As Ações Comunitárias levam a Psicologia Humanista e a Abordagem Centrada na Pessoa para diferentes contextos da cidade, em parceria com instituições, grupos e comunidades. São iniciativas que promovem cuidado, diálogo e presença onde a escuta se fizer necessária.",
+      "As Ações Coletivas levam a Psicologia Humanista e a Abordagem Centrada na Pessoa para diferentes contextos da cidade, em parceria com instituições, grupos e comunidades. São iniciativas que promovem cuidado, diálogo e presença onde a escuta se fizer necessária.",
     icon: TreeDeciduous,
     edicoesPassadas: [],
   },

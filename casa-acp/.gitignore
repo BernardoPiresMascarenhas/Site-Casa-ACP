@@ -40,5 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# imagens originais (backup local pre-conversao para WebP) - nao vao para o deploy
+/assets-originais/
+
 # pacotes de deploy (contem .env.local com a chave da API)
 *.zip

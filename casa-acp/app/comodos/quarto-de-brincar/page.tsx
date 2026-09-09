@@ -48,9 +48,11 @@ export default function QuartoBrincarCrescerPage() {
             {/* Foto do Quarto de Brincar e Crescer */}
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2">
               <Image
-                src="/Quartodebrincar.png"
+                src="/Quartodebrincar.webp"
                 alt="Quarto de Brincar e Crescer da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

@@ -8,8 +8,8 @@ import { ArrowLeft, Search, Filter, BookOpen } from "lucide-react";
 import { ProximoEncontro } from "@/components/ProximoEncontro";
 import { ARTIGOS, nomesAutores } from "@/lib/cozinhaLiteraria";
 
-const CATEGORIAS = ["Todas", "ACP", "Clínica", "Envelhecimento", "Infância", "Plantão", "Formação", "Vida Cotidiana"];
-const AUTORAS = ["Todas", "Dalissa", "Eveline", "Hanna", "Lilian", "Convidados"];
+const CATEGORIAS = ["Todas", "ACP", "Clínica Viva", "Envelhecimento", "Infância", "Plantão", "Formação", "Vida Cotidiana"];
+const AUTORAS = ["Todas", "Dalissa", "Eveline", "Hanna", "Lilian", "Hóspedes"];
 
 export default function CozinhaLiterariaPage() {
   const [busca, setBusca] = useState("");
@@ -22,7 +22,11 @@ export default function CozinhaLiterariaPage() {
       const matchBusca = artigo.titulo.toLowerCase().includes(busca.toLowerCase()) ||
                          artigo.resumo.toLowerCase().includes(busca.toLowerCase());
       const matchCat = catSelecionada === "Todas" || artigo.categoria === catSelecionada;
-      const matchAutora = autoraSelecionada === "Todas" || artigo.autores.some((autor) => autor.nome === autoraSelecionada);
+      const matchAutora =
+        autoraSelecionada === "Todas" ||
+        (autoraSelecionada === "Hóspedes"
+          ? artigo.autores.some((autor) => autor.hospedeId)
+          : artigo.autores.some((autor) => autor.nome === autoraSelecionada));
       
       return matchBusca && matchCat && matchAutora;
     });
@@ -69,9 +73,11 @@ export default function CozinhaLiterariaPage() {
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2">
               <Image
-                src="/Cozinhaliteraria.png"
+                src="/Cozinhaliteraria.webp"
                 alt="Cozinha Literária da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
@@ -123,11 +129,11 @@ export default function CozinhaLiterariaPage() {
               </div>
             </div>
 
-            {/* Filtro: Autora */}
+            {/* Filtro: Autor */}
             <div className="flex-1 border-t border-marrom/10 pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-12">
               <div className="mb-3 flex items-center gap-2">
                 <Filter className="h-4 w-4 text-salvia" />
-                <span className="font-lato text-sm font-bold uppercase tracking-widest text-marrom">Autoras</span>
+                <span className="font-lato text-sm font-bold uppercase tracking-widest text-marrom">Autores</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {AUTORAS.map(autora => (
@@ -210,7 +216,7 @@ export default function CozinhaLiterariaPage() {
                 <BookOpen className="mb-4 h-12 w-12 text-marrom/20" />
                 <h3 className="font-playfair text-2xl text-marrom">Nenhum texto encontrado</h3>
                 <p className="mt-2 font-lato text-marrom/60">
-                  Tente ajustar sua busca ou mudar os filtros de tema e autora.
+                  Tente ajustar sua busca ou mudar os filtros de tema e autor.
                 </p>
                 <button 
                   onClick={() => { setBusca(""); setCatSelecionada("Todas"); setAutoraSelecionada("Todas"); }}

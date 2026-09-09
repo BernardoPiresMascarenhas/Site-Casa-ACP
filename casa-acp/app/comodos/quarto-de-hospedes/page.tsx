@@ -3,9 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, DoorOpen, Sparkles, BookOpen, Send, History } from "lucide-react";
+import { ArrowLeft, ArrowRight, DoorOpen, History } from "lucide-react";
+import { hospedeAtual } from "@/lib/hospedes";
 
 export default function QuartoDeHospedesPage() {
+  const hospede = hospedeAtual();
+
   return (
     <main className="min-h-screen bg-creme pt-40 pb-24">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -46,9 +49,11 @@ export default function QuartoDeHospedesPage() {
             {/* Foto do Quarto de Hóspedes */}
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2">
               <Image
-                src="/quartodehospedes1.png"
+                src="/quartodehospedes1.webp"
                 alt="Quarto de Hóspedes da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
@@ -78,7 +83,7 @@ export default function QuartoDeHospedesPage() {
           </div>
         </motion.section>
 
-        {/* ── Hóspede Atual (Placeholder "Em breve") ── */}
+        {/* ── Hóspede Atual ── */}
         <motion.section 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,35 +94,81 @@ export default function QuartoDeHospedesPage() {
           <h2 className="mb-8 font-playfair text-3xl text-marrom text-center md:text-left">
             Hóspede Atual
           </h2>
-          <div className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm border border-marrom/5 md:flex-row">
-            {/* Espaço da Foto - Atualmente com design de "Aguardando" */}
-            <div className="flex min-h-[300px] w-full flex-col items-center justify-center bg-bege/50 p-8 md:w-2/5 border-b md:border-b-0 md:border-r border-marrom/10">
-              <DoorOpen className="mb-4 h-16 w-16 text-terracota/30" strokeWidth={1} />
-              <span className="font-lato text-sm font-semibold uppercase tracking-widest text-marrom/40 text-center">
-                Quarto sendo preparado
-              </span>
+
+          {hospede ? (
+            <div className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm border border-marrom/5 md:flex-row">
+              {/* Retrato da hóspede */}
+              <div className="relative min-h-[380px] w-full border-b border-marrom/10 md:w-2/5 md:border-b-0 md:border-r">
+                <Image
+                  src={hospede.foto}
+                  alt={`Retrato de ${hospede.nome}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover object-top"
+                />
+              </div>
+
+              {/* Informações da Residência */}
+              <div className="flex w-full flex-col justify-center p-10 md:w-3/5 lg:p-16">
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <span className="rounded-full bg-salvia/10 px-3 py-1 font-lato text-xs font-bold uppercase tracking-widest text-salvia">
+                    Residência Temporária
+                  </span>
+                  <span className="font-lato text-sm font-semibold text-marrom/40">
+                    {hospede.periodo}
+                  </span>
+                </div>
+
+                <h3 className="mb-2 font-playfair text-3xl text-marrom md:text-4xl">
+                  {hospede.nome}
+                </h3>
+                <p className="mb-6 font-lato text-base font-semibold text-terracota">
+                  {hospede.titulo}
+                </p>
+
+                <p className="font-lato text-base leading-relaxed text-marrom/70 line-clamp-5">
+                  {hospede.bio[0]}
+                </p>
+
+                <Link
+                  href={`/comodos/quarto-de-hospedes/${hospede.id}`}
+                  className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-terracota px-8 py-3.5 font-lato text-sm font-semibold uppercase tracking-wider text-creme transition-colors hover:bg-marrom"
+                >
+                  Ver Hóspede
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
-            
-            {/* Informações da Residência */}
-            <div className="flex w-full flex-col justify-center p-10 md:w-3/5 lg:p-16">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="rounded-full bg-salvia/10 px-3 py-1 font-lato text-xs font-bold uppercase tracking-widest text-salvia">
-                  Residência Temporária
-                </span>
-                <span className="font-lato text-sm font-semibold text-marrom/40">
-                  Em breve
+          ) : (
+            <div className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm border border-marrom/5 md:flex-row">
+              {/* Espaço da Foto - design de "Aguardando" */}
+              <div className="flex min-h-[300px] w-full flex-col items-center justify-center bg-bege/50 p-8 md:w-2/5 border-b md:border-b-0 md:border-r border-marrom/10">
+                <DoorOpen className="mb-4 h-16 w-16 text-terracota/30" strokeWidth={1} />
+                <span className="font-lato text-sm font-semibold uppercase tracking-widest text-marrom/40 text-center">
+                  Quarto sendo preparado
                 </span>
               </div>
-              <h3 className="mb-4 font-playfair text-3xl text-marrom md:text-4xl">
-                Aguardando nosso primeiro hóspede
-              </h3>
-              <p className="font-lato text-base leading-relaxed text-marrom/70">
-                A cama está feita, os livros estão na mesa de cabeceira e a escuta está 
-                preparada. Em breve, este cômodo ganhará sua primeira voz convidada. 
-                Fique atento à nossa Varanda para saber quem será!
-              </p>
+
+              <div className="flex w-full flex-col justify-center p-10 md:w-3/5 lg:p-16">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="rounded-full bg-salvia/10 px-3 py-1 font-lato text-xs font-bold uppercase tracking-widest text-salvia">
+                    Residência Temporária
+                  </span>
+                  <span className="font-lato text-sm font-semibold text-marrom/40">
+                    Em breve
+                  </span>
+                </div>
+                <h3 className="mb-4 font-playfair text-3xl text-marrom md:text-4xl">
+                  Aguardando nosso próximo hóspede
+                </h3>
+                <p className="font-lato text-base leading-relaxed text-marrom/70">
+                  A cama está feita, os livros estão na mesa de cabeceira e a escuta está 
+                  preparada. Em breve, este cômodo ganhará uma nova voz convidada. 
+                  Fique atento à nossa Varanda para saber quem será!
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </motion.section>
 
         {/* ── Estrutura do Ciclo ── */}
@@ -178,10 +229,10 @@ export default function QuartoDeHospedesPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 gap-8 md:grid-cols-2"
+          className="flex justify-center"
         >
           {/* Arquivo de Ciclos Anteriores */}
-          <div className="flex flex-col items-center justify-center rounded-3xl bg-white p-10 text-center shadow-sm border border-marrom/5">
+          <div className="flex w-full max-w-xl flex-col items-center justify-center rounded-3xl bg-white p-10 text-center shadow-sm border border-marrom/5">
             <History className="mb-6 h-10 w-10 text-marrom/30" />
             <h3 className="mb-3 font-playfair text-2xl text-marrom">Arquivo de Ciclos</h3>
             <p className="mb-8 font-lato text-base text-marrom/70">
@@ -190,22 +241,6 @@ export default function QuartoDeHospedesPage() {
             <button disabled className="cursor-not-allowed rounded-full bg-marrom/5 px-6 py-2.5 font-lato text-sm font-medium text-marrom/40">
               Arquivo Vazio
             </button>
-          </div>
-
-          {/* Formulário de Candidatura */}
-          <div className="flex flex-col items-center justify-center rounded-3xl bg-terracota/5 p-10 text-center shadow-sm border border-terracota/10">
-            <Sparkles className="mb-6 h-10 w-10 text-terracota/60" />
-            <h3 className="mb-3 font-playfair text-2xl text-marrom">Seja nosso hóspede</h3>
-            <p className="mb-8 font-lato text-base text-marrom/70">
-              Tem um projeto, pesquisa ou reflexão alinhada à Abordagem Centrada na Pessoa e deseja partilhar conosco?
-            </p>
-            <Link 
-              href="#" // Coloque o link do Google Forms ou formulário de contato aqui
-              className="inline-flex items-center gap-2 rounded-full bg-terracota px-6 py-2.5 font-lato text-sm font-medium text-white transition-colors hover:bg-marrom"
-            >
-              <Send className="h-4 w-4" />
-              Preencher Formulário
-            </Link>
           </div>
         </motion.section>
 

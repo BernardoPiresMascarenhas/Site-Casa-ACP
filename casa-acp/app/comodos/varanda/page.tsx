@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, MapPin, ArrowRight, ExternalLink } from "lucide-react";
-import { agendaOrdenadaPorData } from "@/lib/agenda";
+import { agendaOrdenadaPorData, rotuloDeData } from "@/lib/agenda";
 
 const AGENDA = agendaOrdenadaPorData();
 
@@ -50,9 +50,11 @@ export default function VarandaPage() {
             {/* Foto da Varanda */}
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2">
               <Image
-                src="/Varanda.png"
+                src="/Varanda.webp"
                 alt="Varanda da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
@@ -110,6 +112,7 @@ export default function VarandaPage() {
                     alt={noticia.titulo}
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
+                    style={{ objectPosition: noticia.imagemPosicao }}
                     className="object-cover"
                   />
                 </div>
@@ -120,7 +123,7 @@ export default function VarandaPage() {
                   {/* Data em Terracota */}
                   <div className="flex items-center gap-2 font-lato text-sm font-bold text-terracota">
                     <Calendar className="h-4 w-4" />
-                    <span>{noticia.data}</span>
+                    <span>{rotuloDeData(noticia)}</span>
                   </div>
                   {/* Badge do Cômodo de Origem */}
                   <div className="rounded-full bg-marrom/5 px-3 py-1 font-lato text-[10px] font-bold uppercase tracking-widest text-marrom/60">
@@ -146,7 +149,7 @@ export default function VarandaPage() {
                       rel="noopener noreferrer"
                       className="inline-flex w-fit items-center gap-2 rounded-full bg-terracota px-5 py-2.5 font-lato text-sm font-semibold text-white transition-colors hover:bg-terracota/90"
                     >
-                      Realizar inscrição
+                      {noticia.inscricaoLinkLabel ?? "Realizar inscrição"}
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   )}

@@ -9,34 +9,34 @@ import { ArrowLeft, MessageCircle } from "lucide-react";
 const EQUIPE = [
   {
     id: "dalissa",
-    nome: "Dalissa",
+    nome: "Dalissa Vieira",
     crp: "CRP 04/49035",
-    areas: ["Psicologia Clínica · ACP", "Gerontologia · Plantão Psicológico"],
-    foto: "/dalissa.jpeg",
+    areas: ["Cuidadora da Casa ACP"],
+    foto: "/dalissa02.webp",
     whatsapp: "5531994437456",
   },
   {
     id: "eveline",
-    nome: "Eveline",
-    crp: "CRP 04/5824",
-    areas: ["Psicologia Clínica · ACP", "Saúde Mental · Plantão Psicológico"],
-    foto: "/Eveline2.jpeg",
+    nome: "Eveline Alves",
+    crp: "CRP 04/50824",
+    areas: ["Cuidadora da Casa ACP"],
+    foto: "/eveline0.webp",
     whatsapp: "5531998341105",
   },
   {
     id: "hanna",
-    nome: "Hanna",
+    nome: "Hanna Luiza",
     crp: "CRP 04/51491",
-    areas: ["Psicologia Clínica · ACP", "Crianças, Adolescentes e Adultos"],
-    foto: "/hanna.jpeg",
+    areas: ["Cuidadora da Casa ACP"],
+    foto: "/hanna0.webp",
     whatsapp: "5531987848320",
   },
   {
     id: "lilian",
-    nome: "Lilian",
+    nome: "Lilian Tarabal",
     crp: "CRP 04/47161",
-    areas: ["Psicóloga · ACP", "Ludoterapia · Focalização"],
-    foto: "/lilian.jpeg",
+    areas: ["Cuidadora da Casa ACP"],
+    foto: "/lilian0.webp",
     whatsapp: "5531993059596",
   },
 ];
@@ -82,9 +82,11 @@ export default function SalaDeEstarPage() {
             {/* Foto da Sala de Estar */}
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2">
               <Image
-                src="/Sala de estar.png"
+                src="/Sala de estar.webp"
                 alt="Sala de estar da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

@@ -8,6 +8,8 @@ export interface AutorArtigo {
   nomeCompleto: string;
   // Slug em /equipe/[id], quando a pessoa faz parte do time da Casa.
   equipeId?: string;
+  // Slug em /comodos/quarto-de-hospedes/[id], quando a pessoa é uma voz convidada.
+  hospedeId?: string;
 }
 
 export interface Artigo {
@@ -23,12 +25,15 @@ export interface Artigo {
 
 const DALISSA: AutorArtigo = { nome: "Dalissa", nomeCompleto: "Dalissa Vieira Teixeira", equipeId: "dalissa" };
 const MARIA_LUIZA: AutorArtigo = { nome: "Maria", nomeCompleto: "Maria Luiza Rocha de Andrade" };
+const EVELINE: AutorArtigo = { nome: "Eveline", nomeCompleto: "Eveline Alves de Abreu", equipeId: "eveline"};
+const HANNA: AutorArtigo = { nome: "Hanna", nomeCompleto: "Hanna Luiza Oliveira Santos Nonato", equipeId: "hanna"};
+const ALINE: AutorArtigo = { nome: "Aline", nomeCompleto: "Aline de Oliveira Calisto", hospedeId: "aline" };
 
 export const ARTIGOS: Artigo[] = [
   {
     id: "1",
     titulo: "Hoje, recebi a notícia de que meu cliente partiu…",
-    categoria: "Clínica",
+    categoria: "Clínica Viva",
     autores: [DALISSA],
     data: "23 Out 2024",
     resumo: "No primeiro momento, fiquei perplexa. Em seguida, um calor e uma pressão no peito tomaram conta, acompanhados de uma lágrima tímida e solitária.",
@@ -44,34 +49,39 @@ export const ARTIGOS: Artigo[] = [
   },
   {
     id: "2",
-    titulo: "Natal Intergeracional",
-    categoria: "Vida Cotidiana",
-    autores: [DALISSA],
-    data: "21 Dez 2024",
-    resumo: "O Natal é muito mais do que um feriado tradicional. É um convite para renovarmos laços e reencontrarmos nossa essência coletiva, atravessando gerações.",
+    titulo: "Quando a pessoa toca a própria música",
+    categoria: "Clínica Viva",
+    autores: [EVELINE],
+    data: "19 Jul 2026",
+    resumo: "Um belo relato clínico sobre como a metáfora de uma canção serviu de espelho para que uma cliente reconhecesse seu valor e iniciasse um movimento de transformação.",
     conteudo: [
-      "O Natal, celebrado anualmente em 25 de dezembro, é muito mais do que um feriado cristão tradicional. É um convite para renovarmos laços e reencontrarmos nossa essência coletiva, atravessando gerações com amor, partilha e cuidado. Apesar de suas origens estarem enraizadas em tradições antigas, como o festival romano do Sol Invictus — o Sol Invencível —, e de sua ressignificação pela Igreja Católica no século IV, essa data transcende rótulos religiosos, oferecendo um momento de profunda conexão humana.",
-      "Hoje, o Natal une cristãos e não cristãos em torno de símbolos universais de generosidade e esperança. Seja por meio da troca de presentes, da Ceia de Natal ou da magia do Papai Noel, essas tradições refletem um legado compartilhado, passado de geração em geração, onde histórias, valores e afetos são transmitidos e atualizados. Nesse cenário, surge a beleza da intergeracionalidade — o encontro entre diferentes idades e experiências, formando uma rica teia de aprendizados e vínculos.",
-      "O Natal é, por excelência, um espaço intergeracional. Em torno da mesa, bisavós, avós, filhos, netos e amigos compartilham memórias, risadas e sonhos. Cada prato típico carrega o sabor de lembranças, e cada conversa revive histórias que moldam identidades. Para quem envelhece, é uma oportunidade de compartilhar sabedoria, reviver momentos e sentir-se parte de uma vida pulsante. Para os mais jovens, é um momento de ouvir e aprender, mas também de contribuir com novas perspectivas, compartilhar sonhos e dialogar com as trajetórias que pavimentaram o caminho que hoje percorrem.",
-      "Ao rompermos nossas bolhas geracionais, criamos uma espuma humana — viçosa e brilhante — formada pelo diálogo, pelo afeto e pelas trocas que o encontro entre diferentes gerações pode proporcionar. Cada partilha enriquece o outro, fazendo do Natal não apenas uma celebração, mas um movimento vivo de construção de vínculos e significados.",
-      "Nas brincadeiras, como o amigo oculto, nos momentos musicais ouvindo juntos uma canção, seja nova ou antiga, ou até em simples reflexões sobre o ano que passou, podemos cultivar esse sentido de união, reafirmando que ninguém caminha sozinho. Assim, o Natal torna-se uma celebração de histórias e esperanças compartilhadas, uma oportunidade de ouvir e ser ouvido, de ensinar e aprender e, acima de tudo, de renovar a força das relações humanas.",
-      "É o momento de viver o presente — não apenas aquele que está debaixo da árvore, mas a dádiva da convivência, onde cada geração enriquece a outra. Que nessa festa possamos perpetuar tradições, criar memórias e construir juntos uma espuma que nos envolva de maneira carinhosa, unindo-nos com amor, respeito e a beleza de sermos, ao mesmo tempo, distintos e interdependentes.",
+      "Há encontros clínicos em que uma palavra parece insuficiente para abarcar aquilo que a pessoa vive. A dor chega fragmentada, estilhaçada por lembranças, ressentimentos e perguntas que ainda não encontraram um lugar onde possam se encaixar. Nesses momentos, às vezes emerge uma imagem, uma poesia ou uma canção que oferece contorno ao que, até então, era apenas um sentimento difuso.",
+      "Em um desses encontros, uma cliente compartilhava sua frustração diante da relação estabelecida com os irmãos. Recordava que, durante os últimos anos de vida de seus pais, foi ela quem assumiu os cuidados cotidianos. Acompanhou consultas, administrou medicações e cuidadores, atravessou internações, reorganizou a própria vida para sustentar a deles. Naquele tempo, sentia-se valorizada, procurada, reconhecida pela família. Hoje, com a ausência dos pais e o fim dessa responsabilidade, percebe que os vínculos parecem ter mudado de lugar. Os telefonemas se tornaram escassos, os convites desapareceram, e sua presença parece ser lembrada apenas quando há alguma necessidade a ser resolvida. Sua fala não carregava apenas tristeza. Havia uma indignação profunda diante da percepção de que o afeto recebido parecia condicionado à sua utilidade.",
+      "Na potência e entrega daquele encontro, me surgiu a lembrança da canção Geni e o Zepelim, de Chico Buarque. Compartilhei com ela a imagem da protagonista da música, uma mulher que, durante toda a narrativa, é desprezada, julgada e rejeitada, mas que, quando se torna necessária para salvar a cidade, passa a ser procurada, valorizada e desejada. Terminada sua função, volta imediatamente ao lugar da exclusão.",
+      "A analogia não pretendia explicar sua história, tampouco definir sua experiência. Era apenas uma possibilidade de aproximação. E foi então que algo aconteceu. Seus olhos se arregalaram, como se a imagem trazida por mim tivesse encontrado sentido. O silêncio que se seguiu parecia anunciar que algo dentro dela havia se encaixado. Ao reconhecer-se naquela imagem, ela se apropriou desse sentimento e pôde, enfim, dizê-lo em primeira pessoa. Mais do que reconhecer uma ferida, começou também a reconhecer um desejo: o de não perpetuar esse modo de existir em que o próprio valor depende daquilo que oferece aos outros. Apenas emprestei uma imagem; foi ela quem reconheceu, ali, sua própria voz.",
+      "Na Abordagem Centrada na Pessoa, Carl Rogers nos lembra que a mudança acontece quando a pessoa encontra um espaço suficientemente seguro para entrar em contato com sua própria experiência. O terapeuta não produz a transformação; oferece uma relação marcada pela presença, pela autenticidade e pela aceitação, para que aquilo que já pulsa internamente possa emergir.",
+      "Talvez seja esse um dos gestos mais bonitos da clínica humanista, especial na Abordagem Centrada na Pessoa: confiar que cada pessoa traz consigo uma sabedoria organísmica, ainda que, por vezes, ela esteja encoberta pelas exigências, pelas relações e pelos papéis que aprendeu a desempenhar. Quando a minha cliente conseguiu reconhecer um padrão que atravessa sua história, não porque lhe foi imposto no contexto terapêutico, mas porque encontrou dentro de si recursos, inaugurando um movimento de abertura e liberdade.",
+      "A música de Chico Buarque permaneceu apenas como metáfora. O que realmente transformou aquele encontro foi o instante em que ela deixou de olhar apenas para a forma como era tratada pelos irmãos e passou a olhar para si mesma, perguntando-se se desejava continuar ocupando esse lugar de quem existe apenas enquanto serve.",
+      "A clínica, por vezes, é exatamente isso: um espaço onde uma canção deixa de ser apenas uma canção e se torna espelho. Não para aprisionar alguém em uma história, mas para que, ao finalmente se reconhecer, possa escolher e estar no mundo de uma maneira diferente."
     ],
   },
   {
     id: "3",
-    titulo: "Arquitetura Existencial: redesenhando um novo envelhecer",
-    categoria: "Envelhecimento",
-    autores: [DALISSA],
-    data: "14 Ago 2025",
-    resumo: "O aumento da longevidade nos convida a pensar uma outra arquitetura existencial: menos rígida, mais orgânica; menos estrada reta, mais jardim.",
+    titulo: "Entre telas e presenças",
+    categoria: "Reflexão",
+    autores: [HANNA],
+    data: "30 Set 2025",
+    resumo: "Uma reflexão sobre o impacto da tecnologia na comunicação humana e o que significa ser uma presença autêntica no ambiente virtual.",
     conteudo: [
-      "Ainda carregamos no corpo e na mente um modelo de vida herdado de nossos pais e avós: primeiro aprendemos, depois trabalhamos e, ao fim, descansamos. Uma sequência quase sempre linear, clara, previsível, como se o tempo humano pudesse ser guardado em três gavetas estanques.",
-      "Esse roteiro fazia sentido quando a expectativa de vida era curta e os ciclos sociais obedeciam a ritmos mais rígidos. Mas hoje vivemos mais e, talvez o mais importante, vivemos de forma mais complexa, mais imprevisível e mais diversa. Talvez o paradigma de uma vida tricompartimentada já não nos sirva mais…",
-      "O aumento da longevidade nos convida a pensar uma outra arquitetura existencial: menos rígida, mais orgânica; menos estrada reta, mais jardim. O New Map of Life, proposto pelo Stanford Center on Longevity, aponta que não basta viver até os 80, 90 ou 100 anos: é preciso viver com sentido, com presença e com vínculos que sustentem nossa existência no mundo.",
-      "Essa nova cartografia da vida pede que distribuamos aprendizado, trabalho e descanso ao longo de toda a existência, como ciclos que se renovam e se entrelaçam. Aos 60, não estamos no epílogo; muitas vezes, estamos no início de novos capítulos tão criativos, férteis e transformadores quanto qualquer juventude.",
-      "O envelhecer, assim, deixa de ser árido e passa a ser território vivo: um espaço para reinventar papéis, abrir janelas, restaurar alicerces e cultivar novas paisagens internas. Não se trata apenas de prolongar o tempo, mas de ampliar a experiência, permitindo que a identidade siga plástica, mutável e poética.",
-      "Repensar o envelhecer é, no fundo, um exercício de criatividade. É reconhecer que cada fase da vida pode abrigar novos começos. É aceitar que nosso mapa não está pronto e que nossa casa interna pode ser redesenhada, tantas vezes quanto for necessário, para que possamos viver com liberdade, cuidado, autenticidade e imaginação.",
+      "A tecnologia facilita ou dificulta a nossa comunicação? E como ser presença nesse espaço multifacetado?",
+      "Dia desses, me vi mergulhada em reflexões sobre o que significa estar presente. Presente na vida das pessoas que amo e que não estão próximas fisicamente, presente na vida dos clientes que atendo de forma on-line, presente nas tantas possibilidades, boas e desafiadoras, que esse universo virtual nos oferece.",
+      "Sou tão do toque, do abraço, que às vezes o desejo é que essa janelinha, por onde as palavras e trocas passam, consiga transmitir também o calor, o aconchego, o afeto, como se fosse possível, pela tela, sentir de fato o abraço que eu gostaria de oferecer.",
+      "Talvez a vídeo chamada seja um convite para sair da fantasia e pisar na realidade de um olhar vivo, ainda que distante. Talvez a clareza de palavras bem ditas, sem entrelinhas, revele exatamente o que se guarda no coração.",
+      "Mas o fato é que estamos cercados de inovações no modo de nos comunicar: figurinhas, vídeos curtos, mensagens instantâneas, formas rápidas e criativas de dizer muito em pouco. Ainda assim, fica a indagação: será que conseguimos estar inteiros nessas trocas? Ou corremos o risco de apenas reproduzir fragmentos de nós mesmos?",
+      "A tecnologia é ponte ou barreira?",
+      "Talvez seja ambas. Talvez dependa da forma como a utilizamos.",
+      "O que sei é que, em alguns momentos, presença é exatamente isso: quando a escuta atravessa a tela e chega ao coração, quando a palavra encontra eco e cuidado, quando o virtual se torna espaço de encontro.",
+      "E você, como tem vivido a experiência de estar presente entre telas e encontros?"
     ],
   },
   {
@@ -201,6 +211,64 @@ export const ARTIGOS: Artigo[] = [
       "Também é fundamental que a pessoa seja reconhecida como sujeito e não apenas como portadora de uma doença. Esse reconhecimento é essencial, não apenas pela família, mas também pelas pessoas que oferecem suporte. A solidão se dissolve quando há presença genuína, quando alguém segura a mão e diz: “estou aqui”. Os vínculos podem ser cultivados para que a existência continue significativa, mesmo que momento a momento, até o último dia. Afinal, quem somos nós sem as relações que nos nutrem?",
       "O fim da vida, como disse Rogers, pode ser uma “abertura à experiência”. E, apesar das limitações e desafios que cada qual experimente, pode ser vivido com respeito, presença e dignidade.",
       "A história de Gene Hackman nos lembra da fragilidade da memória e da urgência do afeto. Que possamos ser presença na vida dos que envelhecem ao nosso lado, não apenas como cuidadores, mas como testemunhas de sua história, como guardiões de sua humanidade."
+    ],
+  },
+  {
+    id: "12",
+    titulo: "Natal Intergeracional",
+    categoria: "Vida Cotidiana",
+    autores: [DALISSA],
+    data: "21 Dez 2024",
+    resumo: "O Natal é muito mais do que um feriado tradicional. É um convite para renovarmos laços e reencontrarmos nossa essência coletiva, atravessando gerações.",
+    conteudo: [
+      "O Natal, celebrado anualmente em 25 de dezembro, é muito mais do que um feriado cristão tradicional. É um convite para renovarmos laços e reencontrarmos nossa essência coletiva, atravessando gerações com amor, partilha e cuidado. Apesar de suas origens estarem enraizadas em tradições antigas, como o festival romano do Sol Invictus — o Sol Invencível —, e de sua ressignificação pela Igreja Católica no século IV, essa data transcende rótulos religiosos, oferecendo um momento de profunda conexão humana.",
+      "Hoje, o Natal une cristãos e não cristãos em torno de símbolos universais de generosidade e esperança. Seja por meio da troca de presentes, da Ceia de Natal ou da magia do Papai Noel, essas tradições refletem um legado compartilhado, passado de geração em geração, onde histórias, valores e afetos são transmitidos e atualizados. Nesse cenário, surge a beleza da intergeracionalidade — o encontro entre diferentes idades e experiências, formando uma rica teia de aprendizados e vínculos.",
+      "O Natal é, por excelência, um espaço intergeracional. Em torno da mesa, bisavós, avós, filhos, netos e amigos compartilham memórias, risadas e sonhos. Cada prato típico carrega o sabor de lembranças, e cada conversa revive histórias que moldam identidades. Para quem envelhece, é uma oportunidade de compartilhar sabedoria, reviver momentos e sentir-se parte de uma vida pulsante. Para os mais jovens, é um momento de ouvir e aprender, mas também de contribuir com novas perspectivas, compartilhar sonhos e dialogar com as trajetórias que pavimentaram o caminho que hoje percorrem.",
+      "Ao rompermos nossas bolhas geracionais, criamos uma espuma humana — viçosa e brilhante — formada pelo diálogo, pelo afeto e pelas trocas que o encontro entre diferentes gerações pode proporcionar. Cada partilha enriquece o outro, fazendo do Natal não apenas uma celebração, mas um movimento vivo de construção de vínculos e significados.",
+      "Nas brincadeiras, como o amigo oculto, nos momentos musicais ouvindo juntos uma canção, seja nova ou antiga, ou até em simples reflexões sobre o ano que passou, podemos cultivar esse sentido de união, reafirmando que ninguém caminha sozinho. Assim, o Natal torna-se uma celebração de histórias e esperanças compartilhadas, uma oportunidade de ouvir e ser ouvido, de ensinar e aprender e, acima de tudo, de renovar a força das relações humanas.",
+      "É o momento de viver o presente — não apenas aquele que está debaixo da árvore, mas a dádiva da convivência, onde cada geração enriquece a outra. Que nessa festa possamos perpetuar tradições, criar memórias e construir juntos uma espuma que nos envolva de maneira carinhosa, unindo-nos com amor, respeito e a beleza de sermos, ao mesmo tempo, distintos e interdependentes.",
+    ],
+  },
+  {
+    id: "13",
+    titulo: "Arquitetura Existencial: redesenhando um novo envelhecer",
+    categoria: "Envelhecimento",
+    autores: [DALISSA],
+    data: "14 Ago 2025",
+    resumo: "O aumento da longevidade nos convida a pensar uma outra arquitetura existencial: menos rígida, mais orgânica; menos estrada reta, mais jardim.",
+    conteudo: [
+      "Ainda carregamos no corpo e na mente um modelo de vida herdado de nossos pais e avós: primeiro aprendemos, depois trabalhamos e, ao fim, descansamos. Uma sequência quase sempre linear, clara, previsível, como se o tempo humano pudesse ser guardado em três gavetas estanques.",
+      "Esse roteiro fazia sentido quando a expectativa de vida era curta e os ciclos sociais obedeciam a ritmos mais rígidos. Mas hoje vivemos mais e, talvez o mais importante, vivemos de forma mais complexa, mais imprevisível e mais diversa. Talvez o paradigma de uma vida tricompartimentada já não nos sirva mais…",
+      "O aumento da longevidade nos convida a pensar uma outra arquitetura existencial: menos rígida, mais orgânica; menos estrada reta, mais jardim. O New Map of Life, proposto pelo Stanford Center on Longevity, aponta que não basta viver até os 80, 90 ou 100 anos: é preciso viver com sentido, com presença e com vínculos que sustentem nossa existência no mundo.",
+      "Essa nova cartografia da vida pede que distribuamos aprendizado, trabalho e descanso ao longo de toda a existência, como ciclos que se renovam e se entrelaçam. Aos 60, não estamos no epílogo; muitas vezes, estamos no início de novos capítulos tão criativos, férteis e transformadores quanto qualquer juventude.",
+      "O envelhecer, assim, deixa de ser árido e passa a ser território vivo: um espaço para reinventar papéis, abrir janelas, restaurar alicerces e cultivar novas paisagens internas. Não se trata apenas de prolongar o tempo, mas de ampliar a experiência, permitindo que a identidade siga plástica, mutável e poética.",
+      "Repensar o envelhecer é, no fundo, um exercício de criatividade. É reconhecer que cada fase da vida pode abrigar novos começos. É aceitar que nosso mapa não está pronto e que nossa casa interna pode ser redesenhada, tantas vezes quanto for necessário, para que possamos viver com liberdade, cuidado, autenticidade e imaginação.",
+    ],
+  },
+
+  {
+    id: "14",
+    titulo: "ACP nas Políticas Públicas",
+    categoria: "ACP",
+    autores: [ALINE],
+    data: "18 Ago 2026",
+    resumo: "Escrito a convite das moradoras da Casa, um diário vivo sobre ser psicóloga no SUS e no SUAS, o adoecimento de quem cuida e o que a Abordagem Centrada na Pessoa pode semear nas políticas públicas.",
+    conteudo: [
+      "> Diário vivo: um diálogo nascente entre mulheres que desejam facilitar mundo.",
+      "Me lanço a essa escrita, sob o convite das moradoras da Casa ACP, que me ofereceram com zelo e cuidado um quarto de hóspedes, um quintal que floresce, uma sala que aconchega. E, mineira como somos, uma cozinha onde o café pode ser passado no coador de pano. Para que eu possa, junto a elas construir morada. A liberdade desse convite, me levou para lugares diversos. Em primeiro momento, me ative justamente a palavra liberdade, um substantivo muito caro a Abordagem Centrada na Pessoa. Já que, é por meio dela que temos solo para explorar nossas possibilidades. Portanto, é a sob seu uso, que ouso me aventurar neste texto sem roteiro, mas que se faz abertura.",
+      "Outra questão que ressoou fortemente em mim, durante a prosa que tivemos, foi a presença explícita da tendência formativa. De algum modo, nossa conexão acontece, sem que saibamos explicar, ou descrever exatamente em palavras. Sabemos sim, experimentar no corpo e na relação, isso que se dá entre nós – eu e a Casa ACP. E porque digo a casa? Seria objetificar as habitantes desse lar? Não, é justamente para dizer que a casa são elas.",
+      "Essa conexão entre nós aconteceu, pois, encontramos morada umas nas outras, ainda que, de forma esporádica ou distante fisicamente, mas, conectada organismicamente. E, curiosamente, ou não, recebi o convite de me achegar a Casa ACP em um momento ímpar de minha experienciação de mundo. Um momento em que, estava sendo tocada a me lançar para além das paredes da clínica tradicional, que a meu ver é sempre clínica ampliada. Portanto, esse organismo vivo que é a terra, e os seres, fez ressoar em nós a busca por esse laço e integração, que aqui buscamos construir.",
+      "Quando penso sobre a clínica em Psicologia, sou atravessada a diálogos internos profundos no tocante a abertura de mundo entre quatro paredes. Como, anteriormente pontuei, clínica é sempre ampliada. Esse é, portanto, um compromisso ético, o de me relacionar nesse espaço com Pessoas – como aprendi com Carl Rogers.",
+      "Ora, então, o texto que se fazia sem roteiro começa a ganhar forma, já que, passo a dizer de um trecho dessa minha caminhada de vida, tendo a psicologia como pulmão. Não é por acaso, que estou sentada diante do computador, “catarseando” essas palavras, às quatro e meia da manhã. Sou impelida assim, a refletir a psicologia, ou a mim mesma nela, a partir das inquietações que me tocam. Elas são muitas, muito embora neste momento, me coloco a cargo da memória, e o que se apresenta é a reflexão da psicologia nas políticas públicas. Como por alguns anos, estive nesse papel, e também por alguns anos já não me encontro nele, sou sempre convocada internamente a olhar para esse lugar, que tanto me potencializou, assim como me fragilizou - ser psicóloga no SUS e SUAS.",
+      "A decisão de me dedicar exclusivamente a psicologia clínica, como é o caso atualmente, não veio sem peso. Se fazendo sempre presente um compromisso de estar próxima daquele lugar. Curiosamente, ou não, os convites a palestrar, a participar de projetos, facilitar rodas de conversa ou situações semelhantes sempre estiveram presentes. E assim eu me vi em determinado momento, num processo que pareceu tão natural quanto espontâneo, sem buscar concretamente ou ativamente por isso, atendendo pessoas – mulheres, que estão como estudantes de psicologia, ou tem como profissão a enfermagem, a psicologia, a medicina e atuam no SUS, em específico na atenção primária ou terciária, em unidades básicas de saúde ou hospitais. Me pego então, no lugar de cuidar de quem cuida. Tendo eu, me retirado da atenção básica de saúde por me sentir adoecida, pelos atravessamentos institucionais que esse fazer também carrega.",
+      "Assim sendo, retomo a reflexão presente no início dessa miscelânea de ideias, que é a condição organísmica da vida, a tendência formativa operante. O que me convida a presentificar o tema da psicologia em políticas públicas, agora ocupando outro lugar, não como um membro, mas uma refletora. E encontrei, no convite recebido, um espaço para dialogarmos o adoecimento das cuidadoras e cuidadores neste cenário. Percebo mesmo, que se trata de um adoecimento institucional. Neste sentido, ter como luz condutora a Abordagem Centrada na Pessoa, me faz pensar em diferentes modos de contribuições para facilitação da construção de ambientes que possibilitem o crescimento e desenvolvimento grupal nessas instituições. Poder pensar, e aqui consigo me ater a SUS e SUAS, pela experiência que carrego, apesar de valer para muitos outros setores. Portanto, pensar em políticas públicas que considerem a importância de provocar um movimento de cuidado grupal, que carreguem atitudes facilitadoras como empatia, consideração positiva incondicional e congruência, é para mim um cenário ideal de cuidado com as pessoas que ali se propõem a doar seu cuidado e atenção a população.",
+      "É fato que tratamos aqui de situar as políticas públicas como operando a lógica do mundo moderno, em seu caráter produtivista, tecnicista e explicativo. Sendo seus protagonistas, vistos como uma engrenagem dessa roda que gira sistematicamente e muitas vezes alienada por essa dinâmica. A proposta de espaços de cuidado, que considerem os trabalhadores, antes de tudo como Pessoas, se mostra a alternativa fundante de um novo modo de se fazer políticas públicas. Neste sentido, nos valer das contribuições não de uma teoria, mas de uma postura ética fundamental para qualquer relação de cuidado autêntico, como propõe Carl Rogers (2009), é promover saúde, sendo esta, uma das principais estratégias político-institucional do SUS.",
+      "Certamente, que não estou inventando a roda. O renomado psicólogo, professor, e já secretário de saúde em algum momento - Ruy Carlos Stockinger, tem levantado essa temática de forma sensível, cuidadosa, e potente, quando se dedica a reflexão da saúde do trabalhador, considerando a Abordagem Centrada na Pessoa do Trabalhador como uma postura e atitude de facilitação fundamental, perante a lógica social, em que a vivência ocupacional e social é a primeira definidora da identidade do indivíduo (Stockinger, 2026).",
+      "Vejo que precisei estar fora, criar novas identidades, para refletir de modo atualizado como é estar dentro, portanto, narrar essa experiência é encontrar novas maneiras de simboliza-la. Narrar é criar outra possibilidade de si mesmo, e neste contexto é também para mim, modo de conexão com o outro, com essa experiência de estar em um contexto muitas vezes marcado por exaustão, relações de poder, desconexão com suas estratégias fundantes como citei, a promoção de saúde.",
+      "Portanto, este diálogo é uma abertura de espaço para que, ao nos encontrarmos em nossas semelhanças e em nossas diferenças, sejamos um só organismo, já que, o ser humano se cria pessoa, na relação. Abrir portas para deixar emergir a compreensão da experiência de ser psicóloga ou psicólogo nesses contextos seria mesmo, fomentar a formação de um grupo reflexivo, na expectativa de que esse seja um espaço que possibilite a expressão emocional compartilhada de pessoas que são atravessadas por essa experiência. E por meio dessa relação estimular a potência já existente em nós, de crescimento pessoal, desenvolvimento e aperfeiçoamento do diálogo e das relações interpessoais nas instituições públicas.",
+      "## Referências",
+      "ROGERS, Carl R. Tornar-se pessoa. São Paulo: Martins Fontes, 2009.",
+      "STOCKINGER, R. C. Psicoterapia centrada na pessoa do trabalhador. In: COPPE, A. A. F. Abordagem Centrada na Pessoa: Práticas e Reflexões. 1 ed. Porto Alegre: Nova Práxis Editorial, 2026. 134-164.",
     ],
   },
 ];

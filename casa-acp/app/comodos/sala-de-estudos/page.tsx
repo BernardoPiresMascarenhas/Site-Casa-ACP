@@ -48,9 +48,11 @@ export default function SalaDeEstudosPage() {
             {/* Foto da Sala de Estudos */}
             <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2">
               <Image
-                src="/Sala de estudos.png"
+                src="/Sala de estudos.webp"
                 alt="Sala de Estudos da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

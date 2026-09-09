@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
 import {
   Armchair,
   Heart,
@@ -77,7 +80,7 @@ const COMODOS: Comodo[] = [
     icon: CookingPot,
   },
   {
-    nome: "Sala de TV",
+    nome: "Sala Multimídia",
     subtitulo: "YouTube e podcast",
     destaque: "Vozes da Casa",
     descricao:
@@ -105,22 +108,56 @@ const COMODOS: Comodo[] = [
   },
 ];
 
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.25, delayChildren: 0.2 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.2, ease: "easeOut" },
+  },
+};
+
 export default function GradeDeComodos() {
   return (
     <section id="comodos" className="bg-white">
       <div className="mx-auto max-w-7xl px-6 py-24 md:px-10">
-        <p className="font-lato text-sm font-semibold uppercase tracking-[0.25em] text-terracota">
+        <motion.p
+          className="font-lato text-sm font-semibold uppercase tracking-[0.25em] text-terracota"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.1, ease: "easeOut" }}
+        >
           Os Cômodos da Casa
-        </p>
-        <h2 className="mt-5 max-w-xl font-playfair text-3xl leading-tight text-marrom md:text-5xl">
+        </motion.p>
+        <motion.h2
+          className="mt-5 max-w-xl font-playfair text-3xl leading-tight text-marrom md:text-5xl"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.1, ease: "easeOut", delay: 0.2 }}
+        >
           Cada ambiente abriga uma forma de cuidado.
-        </h2>
+        </motion.h2>
 
         {/* Grade 3×3 no desktop, coluna única no mobile */}
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <motion.div
+          className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {COMODOS.map((comodo) => (
+            <motion.div key={comodo.rota} variants={item}>
             <Link
-              key={comodo.rota}
               href={comodo.rota}
               className="group relative flex flex-col overflow-hidden rounded-xl bg-creme border border-marrom/5 shadow-sm transition-all hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-terracota md:min-h-[260px]"
             >
@@ -155,8 +192,9 @@ export default function GradeDeComodos() {
                 </p>
               </div>
             </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

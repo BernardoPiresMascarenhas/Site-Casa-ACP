@@ -2,8 +2,24 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowLeft, Tv, Mic, Music, PlayCircle, Headphones } from "lucide-react";
+
+const listContainer: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.18, delayChildren: 0.1 },
+  },
+};
+
+const listItem: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
 export default function SalaDeTvPage() {
   return (
@@ -34,7 +50,7 @@ export default function SalaDeTvPage() {
         >
           <div className="flex flex-col items-center text-center">
             <p className="font-lato text-sm font-semibold uppercase tracking-[0.25em] text-salvia">
-              Sala de TV
+              Sala Multimídia
             </p>
             <h1 className="mt-4 font-playfair text-4xl leading-tight text-marrom md:text-5xl lg:text-6xl">
               Vozes da Casa em imagem e som.
@@ -44,18 +60,32 @@ export default function SalaDeTvPage() {
 
           <div className="mt-14 flex flex-col gap-10 md:flex-row md:items-center md:gap-14">
             {/* Foto da Sala de TV */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.1 }}
+              className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-marrom/5 shadow-sm md:w-1/2"
+            >
               <Image
-                src="/saladetv.png"
+                src="/saladetv.webp"
                 alt="Sala de TV da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
-            </div>
+            </motion.div>
 
-            <div className="space-y-6 font-lato text-base leading-[2] text-marrom/90 md:w-1/2 md:text-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 1.1, delay: 0.15 }}
+              className="space-y-6 font-lato text-base leading-[2] text-marrom/90 md:w-1/2 md:text-lg"
+            >
               <p>
-                A Sala de TV é o espaço audiovisual da Casa. Onde a voz, o rosto e o pensamento das integrantes
+                A Sala Multimídia é o espaço audiovisual da Casa. Onde a voz, o rosto e o pensamento das integrantes
                 chegam a quem não está presente fisicamente.
               </p>
               <p>
@@ -63,7 +93,7 @@ export default function SalaDeTvPage() {
                 acolhimento, reflexões e para nos lembrar que a arte também é caminho para o encontro
                 humano e o cuidado.
               </p>
-            </div>
+            </motion.div>
           </div>
         </motion.section>
 
@@ -73,7 +103,7 @@ export default function SalaDeTvPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 1.1 }}
             className="overflow-hidden rounded-3xl bg-white border border-marrom/5 shadow-sm"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -87,20 +117,26 @@ export default function SalaDeTvPage() {
                 <p className="mb-8 font-playfair text-xl italic text-terracota">
                   Venha conhecer nosso espaço vivo de aprendizagem!
                 </p>
-                <ul className="space-y-4 font-lato text-base text-marrom/80 mb-10">
-                  <li className="flex items-start gap-3">
+                <motion.ul
+                  className="space-y-4 font-lato text-base text-marrom/80 mb-10"
+                  variants={listContainer}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.4 }}
+                >
+                  <motion.li variants={listItem} className="flex items-start gap-3">
                     <PlayCircle className="h-5 w-5 shrink-0 text-terracota/60 mt-0.5" />
                     <span>Vídeos sobre ACP, encontros clínicos e reflexões sobre o humano.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
+                  </motion.li>
+                  <motion.li variants={listItem} className="flex items-start gap-3">
                     <PlayCircle className="h-5 w-5 shrink-0 text-terracota/60 mt-0.5" />
                     <span>Registros de eventos, seminários e rodas de conversa.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
+                  </motion.li>
+                  <motion.li variants={listItem} className="flex items-start gap-3">
                     <PlayCircle className="h-5 w-5 shrink-0 text-terracota/60 mt-0.5" />
                     <span>Entrevistas e conversas entre as integrantes.</span>
-                  </li>
-                </ul>
+                  </motion.li>
+                </motion.ul>
                 <a 
                   href="#" 
                   target="_blank" 
@@ -130,7 +166,7 @@ export default function SalaDeTvPage() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 1.1, delay: 0.2 }}
               className="relative flex flex-col overflow-hidden rounded-3xl bg-salvia p-10 md:p-14 text-creme shadow-sm"
             >
               {/* Badge Em Breve */}
@@ -147,20 +183,26 @@ export default function SalaDeTvPage() {
               <p className="mb-8 font-playfair text-lg italic text-creme/90">
                 Ouça nosso podcast e leve a ACP com você: conversas, reflexões e encontros que inspiram presença e cuidado.
               </p>
-              <ul className="space-y-4 font-lato text-base text-creme/80 flex-1">
-                <li className="flex items-start gap-3">
+              <motion.ul
+                className="space-y-4 font-lato text-base text-creme/80 flex-1"
+                variants={listContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.4 }}
+              >
+                <motion.li variants={listItem} className="flex items-start gap-3">
                   <Headphones className="h-5 w-5 shrink-0 text-creme/60 mt-0.5" />
                   <span>Conversas longas e presentes sobre psicologia humanista.</span>
-                </li>
-                <li className="flex items-start gap-3">
+                </motion.li>
+                <motion.li variants={listItem} className="flex items-start gap-3">
                   <Headphones className="h-5 w-5 shrink-0 text-creme/60 mt-0.5" />
                   <span>Formação clínica, travessias humanas e o que nos move.</span>
-                </li>
-                <li className="flex items-start gap-3">
+                </motion.li>
+                <motion.li variants={listItem} className="flex items-start gap-3">
                   <Headphones className="h-5 w-5 shrink-0 text-creme/60 mt-0.5" />
                   <span>Episódios com convidados e entre as integrantes.</span>
-                </li>
-              </ul>
+                </motion.li>
+              </motion.ul>
             </motion.section>
 
             {/* 3. Playlist da Casa */}
@@ -168,7 +210,7 @@ export default function SalaDeTvPage() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 1.1, delay: 0.3 }}
               className="flex flex-col overflow-hidden rounded-3xl bg-white border border-marrom/5 shadow-sm p-10 md:p-14"
             >
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-marrom/5 text-marrom">
@@ -186,10 +228,18 @@ export default function SalaDeTvPage() {
                 <p>A mesma trilha sonora que toca na nossa sala de espera.</p>
               </div>
 
-              {/* Placeholder para iframe do Spotify/YouTube Music */}
-              <div className="mt-auto aspect-[4/1] w-full rounded-2xl bg-bege flex flex-col items-center justify-center border border-marrom/10 text-marrom/40">
-                <Music className="h-6 w-6 mb-2 opacity-50" />
-                <span className="font-lato text-xs uppercase tracking-widest">Player Musical</span>
+              {/* Player do Spotify */}
+              <div className="mt-auto w-full">
+                <iframe 
+                  style={{ borderRadius: "16px" }} 
+                  src="https://open.spotify.com/embed/playlist/2k8wVbrVNPaQUfK9w9kxxo?utm_source=generator&theme=0" 
+                  width="100%" 
+                  height="152" 
+                  frameBorder="0" 
+                  allowFullScreen={false} 
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                  loading="lazy"
+                ></iframe>
               </div>
             </motion.section>
 

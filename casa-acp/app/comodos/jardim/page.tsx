@@ -53,9 +53,11 @@ export default function JardimPage() {
             {/* Foto do Jardim */}
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-salvia/10 shadow-sm md:w-1/2">
               <Image
-                src="/Jardim.png"
+                src="/Jardim.webp"
                 alt="Jardim da Casa ACP"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

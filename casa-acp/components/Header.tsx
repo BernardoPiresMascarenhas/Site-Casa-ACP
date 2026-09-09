@@ -120,7 +120,7 @@ const Header = () => {
               aria-label="Página inicial"
             >
               <Image
-                src="/logo3.png"
+                src="/logo3.webp"
                 alt="Logo Casa ACP"
                 width={160}
                 height={160}
@@ -194,7 +194,7 @@ const Header = () => {
                 </a>
                 
                 <a
-                  href="https://wa.me/5531999999999"
+                  href="https://wa.me/5531996330001"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center gap-2 px-6 py-3 bg-salvia text-creme text-[14px] font-medium rounded-full hover:bg-terracota transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
@@ -278,7 +278,7 @@ const Header = () => {
                 className="w-full mt-10 space-y-4"
               >
                 <a
-                  href="https://wa.me/5531999999999"
+                  href="https://wa.me/5531996330001"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-salvia text-creme text-lg font-medium rounded-full hover:bg-terracota transition-colors"
