@@ -5,7 +5,8 @@ import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, BookOpen, Calendar } from "lucide-react";
-import { getHospedePorId, contribuicoesDoHospede } from "@/lib/hospedes";
+import { getHospedePorId, contribuicoesDoHospede, encontrosDoHospede } from "@/lib/hospedes";
+import { rotuloDeData } from "@/lib/agenda";
 
 export default function HospedeClient() {
   const params = useParams();
@@ -21,6 +22,7 @@ export default function HospedeClient() {
   }
 
   const contribuicoes = contribuicoesDoHospede(hospede.id);
+  const encontros = encontrosDoHospede(hospede.id);
   const primeiroNome = hospede.nome.split(" ")[0];
 
   return (
@@ -156,8 +158,53 @@ export default function HospedeClient() {
             </p>
           </div>
 
-          {contribuicoes.length > 0 ? (
+          {contribuicoes.length + encontros.length > 0 ? (
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+              {encontros.map((evento) => (
+                <div
+                  key={`evento-${evento.id}`}
+                  className="group flex flex-col bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="h-1.5 w-full bg-salvia transition-colors group-hover:bg-terracota"></div>
+
+                  <div className="flex flex-1 flex-col border border-t-0 border-marrom/5 p-8">
+                    <div className="mb-4 flex items-center justify-between border-b border-marrom/10 pb-4">
+                      <span className="font-lato text-xs font-bold uppercase tracking-widest text-salvia">
+                        Encontro
+                      </span>
+                      <span className="flex items-center gap-2 font-lato text-xs text-marrom/40">
+                        <Calendar className="h-3.5 w-3.5" />
+                        {rotuloDeData(evento)}
+                      </span>
+                    </div>
+
+                    <h3 className="mb-4 font-playfair text-2xl leading-snug text-marrom transition-colors group-hover:text-terracota">
+                      {evento.titulo}
+                    </h3>
+
+                    <p className="mb-8 font-lato text-base leading-relaxed text-marrom/70 line-clamp-4">
+                      {evento.descricao}
+                    </p>
+
+                    <div className="mt-auto flex items-center justify-between border-t border-marrom/5 pt-6">
+                      <span className="font-playfair text-sm italic text-marrom/80">
+                        {evento.origem}
+                      </span>
+                      <Link
+                        href={
+                          evento.detalhes
+                            ? `/comodos/varanda/agenda/${evento.id}`
+                            : `/comodos/${evento.origemSlug}`
+                        }
+                        className="font-lato text-sm font-semibold uppercase tracking-wider text-terracota transition-colors group-hover:text-salvia"
+                      >
+                        Ver encontro
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
               {contribuicoes.map((artigo) => (
                 <div
                   key={artigo.id}

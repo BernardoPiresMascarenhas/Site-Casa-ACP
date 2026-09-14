@@ -16,6 +16,29 @@ const INFO_STYLES = [
   "bg-terracota text-creme",
 ];
 
+// Transforma "[rotulo](destino)" em link dentro de um parágrafo: caminhos internos
+// (ex.: um texto da Cozinha Literária) usam <Link>; endereços externos abrem em nova aba.
+function comLinks(texto: string) {
+  return texto.split(/(\[[^\]]+\]\([^)]+\))/g).map((trecho, i) => {
+    const link = trecho.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (!link) return trecho;
+
+    const [, rotulo, destino] = link;
+    const estilo =
+      "font-semibold text-terracota underline underline-offset-4 transition-colors hover:text-salvia";
+
+    return destino.startsWith("/") ? (
+      <Link key={i} href={destino} className={estilo}>
+        {rotulo}
+      </Link>
+    ) : (
+      <a key={i} href={destino} target="_blank" rel="noopener noreferrer" className={estilo}>
+        {rotulo}
+      </a>
+    );
+  });
+}
+
 export default function EventoDetalhePage() {
   const params = useParams();
   const id = params?.id as string;
@@ -114,7 +137,7 @@ export default function EventoDetalhePage() {
               return (
                 <ul key={i} className="list-disc space-y-2 pl-6 marker:text-terracota">
                   {paragrafo.split("\n").map((item, j) => (
-                    <li key={j}>{item.replace(/^- /, "")}</li>
+                    <li key={j}>{comLinks(item.replace(/^- /, ""))}</li>
                   ))}
                 </ul>
               );
@@ -129,14 +152,14 @@ export default function EventoDetalhePage() {
                   <p className="font-playfair text-xl font-semibold text-salvia md:text-2xl">
                     {primeiraLinha}
                   </p>
-                  <p className="mt-2 whitespace-pre-line">{resto.join("\n")}</p>
+                  <p className="mt-2 whitespace-pre-line">{comLinks(resto.join("\n"))}</p>
                 </div>
               );
             }
 
             return (
               <p key={i} className="whitespace-pre-line">
-                {paragrafo}
+                {comLinks(paragrafo)}
               </p>
             );
           })}

@@ -3,6 +3,7 @@
 // Mantido fora do Client Component para que "app/comodos/quarto-de-hospedes/[id]/page.tsx"
 // (Server Component) consiga ler as chaves em generateStaticParams no build.
 
+import { agendaPorHospede, type AgendaEvento } from "./agenda";
 import { ARTIGOS, type Artigo } from "./cozinhaLiteraria";
 
 export interface Hospede {
@@ -57,7 +58,12 @@ export function hospedesPorData(): Hospede[] {
 }
 
 // Textos que a hóspede deixou na Cozinha Literária.
-// No futuro entram aqui também cursos e encontros conduzidos por ela.
+// No futuro entram aqui também os cursos conduzidos por ela.
 export function contribuicoesDoHospede(id: string): Artigo[] {
   return ARTIGOS.filter((artigo) => artigo.autores.some((autor) => autor.hospedeId === id));
+}
+
+// Encontros da agenda conduzidos pela hóspede (ex.: uma roda de conversa na Sala de Estudos).
+export function encontrosDoHospede(id: string): AgendaEvento[] {
+  return agendaPorHospede(id);
 }

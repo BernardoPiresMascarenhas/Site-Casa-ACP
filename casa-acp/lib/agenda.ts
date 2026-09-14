@@ -12,7 +12,8 @@ export interface AgendaEventoDetalhes {
   // Parágrafos do texto completo. Prefixe com "## " para um destaque isolado
   // (ex.: "## Um encontro para se ouvir"), use "Pergunta?\nResposta" para
   // destacar uma pergunta seguida de sua resposta, ou comece cada linha com
-  // "- " para renderizar o parágrafo como lista.
+  // "- " para renderizar o parágrafo como lista. Trechos no formato
+  // "[rótulo](destino)" viram links (caminhos internos ou endereços externos).
   conteudo: string[];
   info: AgendaEventoInfo[];
 }
@@ -28,6 +29,9 @@ export interface AgendaEvento {
   // Slug do tópico específico dentro do cômodo de origem (ex.: "clube-de-leitura"
   // na Sala de Estudos), quando o evento também deve aparecer na página desse tópico.
   topicoSlug?: string;
+  // Slug em /comodos/quarto-de-hospedes/[id], quando o encontro é conduzido por
+  // uma hóspede. Faz o evento aparecer entre as contribuições dela.
+  hospedeId?: string;
   titulo: string;
   // Resumo curto, usado nos cards da Varanda e do cômodo de origem.
   descricao: string;
@@ -181,6 +185,35 @@ export const AGENDA: AgendaEvento[] = [
       ],
     },
   },
+  {
+    id: "5",
+    data: "10 Out 2026",
+    mes: "Outubro 2026",
+    origem: "Sala de Estudos",
+    origemSlug: "sala-de-estudos",
+    topicoSlug: "rodas-de-conversa",
+    hospedeId: "aline",
+    titulo: "Cuidar de quem cuida",
+    imagem: "/evento5.webp",
+    descricao:
+      "ACP, políticas públicas e relações de cuidado. Na primeira edição do Casa em Prosa, Aline Calisto conduz uma roda de conversa sobre o trabalho de quem cuida, os atravessamentos institucionais, a clínica ampliada e as possibilidades de escuta nas políticas públicas.",
+    local: "On-line",
+    inscricaoLink: "https://www.sympla.com.br/preview-online/3c6110015283339ab6d2a77fb4441480",
+    inscricaoLinkLabel: "Participar da roda",
+    detalhes: {
+      conteudo: [
+        "## Algumas experiências de cuidado também pedem um lugar para serem cuidadas.",
+        "Nesta primeira edição do Casa em Prosa, Aline Calisto nos convida a uma roda de conversa sobre o trabalho de quem cuida, os atravessamentos institucionais, a clínica ampliada e as possibilidades de escuta nas políticas públicas.",
+        "Uma conversa que nasce de [seu texto](/comodos/cozinha-literaria/14), escrito durante sua passagem pelo nosso Quarto de Hóspedes, e que agora segue para a Sala de Estudos.",
+      ],
+      info: [
+        { label: "Data", valor: "10 de outubro" },
+        { label: "Horário", valor: "Das 9h às 10h30" },
+        { label: "Onde", valor: "On-line" },
+        { label: "Facilitação", valor: "Aline Calisto" },
+      ],
+    },
+  },
 ];
 
 // Texto de data exibido nos cards e na página de detalhe do evento.
@@ -196,6 +229,11 @@ export function agendaPorComodo(slug: string): AgendaEvento[] {
 // Eventos ligados a um tópico específico dentro de um cômodo (ex.: Clube de Leitura).
 export function agendaPorTopico(topicoSlug: string): AgendaEvento[] {
   return AGENDA.filter((evento) => evento.topicoSlug === topicoSlug);
+}
+
+// Encontros conduzidos por uma hóspede, exibidos entre as contribuições dela.
+export function agendaPorHospede(hospedeId: string): AgendaEvento[] {
+  return AGENDA.filter((evento) => evento.hospedeId === hospedeId);
 }
 
 // Busca um evento pelo id, usado na sua página de detalhe.
