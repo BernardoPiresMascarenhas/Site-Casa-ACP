@@ -145,10 +145,23 @@ export default function Footer() {
 
         {/* ── Base do Rodapé (Copyright e Voltar ao topo) ── */}
         <div className="mt-20 flex flex-col items-center justify-between border-t border-creme/10 py-8 md:flex-row">
-          <p className="font-lato text-xs font-light text-creme/50">
-            © {new Date().getFullYear()} Casa ACP. Todos os direitos reservados.
-          </p>
-          
+          <div className="flex flex-col items-center gap-2 md:items-start">
+            <p className="font-lato text-xs font-light text-creme/50">
+              © {new Date().getFullYear()} Casa ACP. Todos os direitos reservados.
+            </p>
+            <p className="font-lato text-xs font-light text-creme/50">
+              Desenvolvido por{" "}
+              <a
+                href="https://www.bernardopiresdev.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-creme/70 underline-offset-4 transition-colors hover:text-terracota hover:underline"
+              >
+                Bernardo Pires Dev
+              </a>
+            </p>
+          </div>
+
           <button
             onClick={scrollToTop}
             className="group mt-6 flex items-center gap-2 font-lato text-xs font-light text-creme/50 transition-colors hover:text-terracota md:mt-0"
