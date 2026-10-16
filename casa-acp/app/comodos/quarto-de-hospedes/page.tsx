@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, DoorOpen } from "lucide-react";
-import { hospedeAtual } from "@/lib/hospedes";
+import { hospedesAtuais } from "@/lib/hospedes";
 
 export default function QuartoDeHospedesPage() {
-  const hospede = hospedeAtual();
+  const hospedes = hospedesAtuais();
 
   return (
     <main className="min-h-screen bg-creme pt-40 pb-24">
@@ -83,7 +83,7 @@ export default function QuartoDeHospedesPage() {
           </div>
         </motion.section>
 
-        {/* ── Hóspede Atual ── */}
+        {/* ── Hóspedes ── */}
         <motion.section 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -92,47 +92,51 @@ export default function QuartoDeHospedesPage() {
           className="mb-24"
         >
           <h2 className="mb-8 text-center font-playfair text-3xl text-marrom">
-            Hóspede Atual
+            Hóspedes
           </h2>
 
-          {hospede ? (
-            <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 rounded-3xl border border-marrom/5 bg-white p-8 text-center shadow-sm sm:flex-row sm:items-start sm:gap-10 sm:p-10 sm:text-left">
-              {/* Retrato da hóspede */}
-              <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full border border-marrom/10 sm:h-36 sm:w-36">
-                <Image
-                  src={hospede.foto}
-                  alt={`Retrato de ${hospede.nome}`}
-                  fill
-                  sizes="144px"
-                  className="object-cover object-top"
-                />
-              </div>
+          {hospedes.length > 0 ? (
+            <div className="mx-auto max-w-3xl space-y-8">
+              {hospedes.map((hospede) => (
+                <div key={hospede.id} className="mx-auto flex max-w-3xl flex-col items-center gap-8 rounded-3xl border border-marrom/5 bg-white p-8 text-center shadow-sm sm:flex-row sm:items-start sm:gap-10 sm:p-10 sm:text-left">
+                  {/* Retrato da hóspede */}
+                  <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full border border-marrom/10 sm:h-36 sm:w-36">
+                    <Image
+                      src={hospede.foto}
+                      alt={`Retrato de ${hospede.nome}`}
+                      fill
+                      sizes="144px"
+                      className="object-cover object-top"
+                    />
+                  </div>
 
-              {/* Informações da Residência */}
-              <div className="flex flex-col items-center sm:items-start">
-                <span className="font-lato text-[11px] font-semibold uppercase tracking-[0.2em] text-salvia">
-                  Residência temporária · {hospede.periodo}
-                </span>
+                  {/* Informações da Residência */}
+                  <div className="flex flex-col items-center sm:items-start">
+                    <span className="font-lato text-[11px] font-semibold uppercase tracking-[0.2em] text-salvia">
+                      Residência temporária · {hospede.periodo}
+                    </span>
 
-                <h3 className="mt-3 font-playfair text-2xl text-marrom md:text-3xl">
-                  {hospede.nome}
-                </h3>
-                <p className="mt-1 font-lato text-sm font-semibold text-terracota">
-                  {hospede.titulo}
-                </p>
+                    <h3 className="mt-3 font-playfair text-2xl text-marrom md:text-3xl">
+                      {hospede.nome}
+                    </h3>
+                    <p className="mt-1 font-lato text-sm font-semibold text-terracota">
+                      {hospede.titulo}
+                    </p>
 
-                <p className="mt-4 font-lato text-sm leading-relaxed text-marrom/70">
-                  {hospede.resumo ?? hospede.bio[0]}
-                </p>
+                    <p className="mt-4 font-lato text-sm leading-relaxed text-marrom/70">
+                      {hospede.resumo ?? hospede.bio[0]}
+                    </p>
 
-                <Link
-                  href={`/comodos/quarto-de-hospedes/${hospede.id}`}
-                  className="mt-6 inline-flex items-center gap-2 font-lato text-sm font-semibold uppercase tracking-wider text-terracota transition-colors hover:text-marrom"
-                >
-                  Ver hóspede
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
+                    <Link
+                      href={`/comodos/quarto-de-hospedes/${hospede.id}`}
+                      className="mt-6 inline-flex items-center gap-2 font-lato text-sm font-semibold uppercase tracking-wider text-terracota transition-colors hover:text-marrom"
+                    >
+                      Ver hóspede
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 rounded-3xl border border-marrom/5 bg-white p-8 text-center shadow-sm sm:flex-row sm:items-start sm:gap-10 sm:p-10 sm:text-left">

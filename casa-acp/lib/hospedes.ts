@@ -41,15 +41,30 @@ export const HOSPEDES: Hospede[] = [
       "Psicóloga pela PUC-Minas, mestre pela UFLA e formada em Psicoterapia Centrada na Pessoa (CPH-Minas). Pesquisa cuidado, feminismo e clínica ampliada.",
     citacao: "Ideias que fermentam. Palavras que ganham forma.",
   },
+  {
+    id: "elen",
+    nome: "Elen Zazá",
+    titulo: "Psicóloga Clínica • Psicoterapeuta de adultos e idosos",
+    periodo: "Outubro de 2026",
+    inicio: "2026-10",
+    foto: "/Elen.webp",
+    // Elen não tem site: o botão "Conheça mais" abre uma conversa no WhatsApp.
+    site: "https://wa.me/5531987973664",
+    bio: [
+      "Graduada em Psicologia pelo Centro Universitário Newton Paiva, em 2004. Pós-graduada em Neuropsicologia pela FUMEC, em 2005; em Gestão Estratégica de Pessoas pelo Senac, em 2011; e em Psicologia Clínica Humanista-Existencial-Fenomenológica pelo UNI-BH, em 2020. Possui formação em Psicologia Clínica na Abordagem Centrada na Pessoa pelo CPH Minas, em 2017, e em Focalização, como Focusing Trainer, pelo The International Focusing Institute, em 2019. Tem experiência em atendimentos clínicos em consultório particular e em clínica de saúde, em atuação junto à equipe multiprofissional de equoterapia e em gestão estratégica de pessoas em empresas.",
+    ],
+    resumo:
+      "Psicóloga pela Newton Paiva, formada na Abordagem Centrada na Pessoa (CPH Minas) e Focusing Trainer pelo The International Focusing Institute. Atende adultos e idosos.",
+  },
 ];
 
 export function getHospedePorId(id: string): Hospede | undefined {
   return HOSPEDES.find((hospede) => hospede.id === id);
 }
 
-// Hóspede em residência no momento: por ora, sempre o primeiro da lista.
-export function hospedeAtual(): Hospede | undefined {
-  return HOSPEDES[0];
+// Hóspedes em residência no momento, na ordem em que foram cadastradas.
+export function hospedesAtuais(): Hospede[] {
+  return HOSPEDES;
 }
 
 // Todos os hóspedes em ordem de residência, do mais recente para o mais antigo.
