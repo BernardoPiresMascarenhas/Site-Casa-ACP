@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
-import { agendaOrdenadaPorData } from "@/lib/agenda";
+import { agendaAtualComDestaque } from "@/lib/agenda";
 
-const AGENDA = agendaOrdenadaPorData();
+const AGENDA = agendaAtualComDestaque();
 
 const containerVariants: Variants = {
   hidden: {},

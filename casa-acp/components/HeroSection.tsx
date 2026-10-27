@@ -43,8 +43,16 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative overflow-hidden bg-creme">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 px-6 pt-36 pb-20 md:flex-row lg:gap-16 md:px-10 md:pt-48 md:pb-28">
+    // Ocupa a tela inteira: pt-24/md:pt-32 reserva a altura do header fixo (h-24/md:h-32
+    // no topo da página) e o conteúdo fica centralizado verticalmente no espaço restante.
+    // Em telas baixas, min-h deixa a seção crescer em vez de cortar o conteúdo.
+    // No desktop, o padding vertical é assimétrico (29px + 99px, mesma soma de md:py-16)
+    // para subir o conjunto ~35px sem mudar a altura total.
+    <section
+      id="home"
+      className="relative flex min-h-screen flex-col overflow-hidden bg-creme pt-24 supports-[height:100dvh]:min-h-dvh md:pt-32"
+    >
+      <div className="mx-auto my-auto flex w-full max-w-7xl flex-col items-start justify-between gap-12 px-6 pt-12 pb-20 md:flex-row lg:gap-16 md:px-10 md:py-16 lg:pt-[29px] lg:pb-[99px]">
         
         {/* ── Coluna esquerda: conteúdo ── */}
         <motion.div 

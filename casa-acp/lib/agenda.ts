@@ -49,6 +49,11 @@ export interface AgendaEvento {
   imagemPosicao?: string;
   // Quando presente, o evento ganha uma página própria em /comodos/varanda/agenda/[id].
   detalhes?: AgendaEventoDetalhes;
+  // Marca o evento como atual: aparece na Varanda da página inicial e na seção
+  // "Acontecendo agora" da Varanda. Sem a marca, o evento vai para "Já passaram".
+  atual?: boolean;
+  // Coloca o evento em primeiro lugar entre os atuais da Varanda (página inicial e cômodo).
+  destaque?: boolean;
 }
 
 export const AGENDA: AgendaEvento[] = [
@@ -130,6 +135,7 @@ export const AGENDA: AgendaEvento[] = [
       "Supervisão Clínica e Estudos em Abordagem Centrada na Pessoa: um espaço de encontro, supervisão, estudo e aprofundamento da prática clínica com crianças, adolescentes e suas famílias. Encontros quinzenais, às quartas-feiras, em grupo fechado.",
     local: "Online",
     inscricaoLink: "https://forms.gle/Whnjo4TemDSW9CJDA",
+    inscricaoLinkLabel: "Formulário de interesse",
     detalhes: {
       conteudo: [
         "## A clínica também precisa de um lugar para ser cuidada.",
@@ -214,6 +220,116 @@ export const AGENDA: AgendaEvento[] = [
       ],
     },
   },
+  {
+    id: "6",
+    data: "31 Out 2026",
+    mes: "Outubro 2026",
+    origem: "Sala de Estudos",
+    origemSlug: "sala-de-estudos",
+    topicoSlug: "rodas-de-conversa",
+    hospedeId: "bruno",
+    titulo: "Os desafios da presença paterna no período da gestação e puerpério da mulher",
+    atual: true,
+    imagem: "/evento6.webp",
+    descricao:
+      "Uma roda de conversa com o psicólogo e professor Bruno Martins sobre os desafios e as possibilidades do envolvimento paterno durante a gestação e o puerpério, com facilitação de Hanna Luiza e Lilian Tarabal.",
+    local: "On-line",
+    inscricaoLink: "https://www.sympla.com.br/evento-online/roda-de-conversa-os-desafios-da-presenca-paterna-na-gestacao-e-no-puerperio-da-mulher/3620146",
+    inscricaoLinkLabel: "Participar da roda",
+    detalhes: {
+      conteudo: [
+        "A roda de conversa “Os desafios da presença paterna no período da gestação e puerpério da mulher” propõe um espaço de escuta, diálogo e reflexão sobre os desafios e as possibilidades do envolvimento paterno durante esse período tão significativo para a mulher, o bebê e a família.",
+        "A gestação e o puerpério são períodos de intensas transformações físicas, emocionais e relacionais. Embora frequentemente o olhar se volte para a experiência da mulher, a presença paterna também é atravessada por expectativas, dúvidas, mudanças e desafios que merecem espaço de acolhimento e reflexão.",
+        "## Como se constrói a presença paterna durante a gestação e após a chegada de um filho? Quais fatores favorecem ou dificultam o envolvimento do pai? Como os aspectos culturais, emocionais e relacionais atravessam essa experiência?",
+        "A partir dessas e de outras questões, o encontro busca ampliar o olhar sobre a paternidade, reconhecendo a importância dos vínculos, da corresponsabilidade no cuidado e da construção de uma rede de apoio que considere as necessidades da mulher, do bebê e de quem também está vivenciando a chegada de uma criança.",
+        "A proposta é favorecer uma conversa aberta, que acolha diferentes experiências e perspectivas, contribuindo para a construção de reflexões sobre a presença paterna e suas possibilidades durante a gestação e o puerpério.",
+        "Para quem é este encontro?\nO encontro é destinado a pais, futuros pais, gestantes, puérperas, casais, familiares e profissionais interessados em refletir sobre a presença paterna, o cuidado e as relações familiares durante a gestação e o puerpério.",
+        "O encontro será introduzido e facilitado por Hanna Luiza e Lilian Tarabal, com a participação do psicólogo e professor Bruno Martins.",
+        "Nos encontramos lá 🧡",
+      ],
+      info: [
+        { label: "Data", valor: "31 de outubro" },
+        { label: "Horário", valor: "Das 9h às 10h30" },
+        { label: "Onde", valor: "On-line" },
+        { label: "Facilitação", valor: "Hanna Luiza e Lilian Tarabal" },
+        { label: "Participação", valor: "Bruno Martins" },
+        { label: "Certificado", valor: "Haverá emissão de certificado" },
+      ],
+    },
+  },
+  {
+    // Notícia sobre o grupo em andamento do evento 3, não um novo encontro.
+    id: "7",
+    data: "19 Out 2026",
+    mes: "Outubro 2026",
+    origem: "Sala de Estudos",
+    origemSlug: "sala-de-estudos",
+    topicoSlug: "supervisoes",
+    titulo: "Universo da Criança e do Adolescente: a clínica também precisa de um lugar para ser cuidada",
+    atual: true,
+    imagem: "/evento7.webp",
+    descricao:
+      "Notícias da Supervisão Clínica e Estudos em Abordagem Centrada na Pessoa: um espaço onde teoria e experiência caminham juntas, para cuidar de quem cuida de crianças, adolescentes e suas famílias.",
+    local: "Online",
+    detalhes: {
+      conteudo: [
+        "## A clínica também precisa de um lugar para ser cuidada.",
+        "O que a supervisão propõe?\nCaminhar pela clínica para além das respostas prontas.",
+        "Nos encontros, teoria e experiência caminham juntas: estudamos, compartilhamos e refletimos sobre o fazer clínico, deixando-nos atravessar pelas perguntas que a prática produz.",
+        "Um espaço para compreender, questionar e construir possibilidades a partir da Abordagem Centrada na Pessoa.",
+        "Como olhamos para a clínica?\nPartimos da compreensão de que crianças e adolescentes são pessoas ativas e protagonistas de suas próprias experiências, constituídas e transformadas nas relações que estabelecem com o mundo e com aqueles que as cercam.",
+        "Por isso, nosso olhar se amplia:",
+        "## criança • adolescente • família • escola • contexto • relações",
+        "Buscamos compreender a experiência da criança e do adolescente sem perder de vista a complexidade de suas relações, oferecendo condições facilitadoras para que diferentes perspectivas possam ser acolhidas, compreendidas e ressignificadas. Olhando também com cuidado para o psicoterapeuta.",
+        "## Estudo, reflexão e construção de sentidos",
+        "O estudo é parte fundamental do nosso percurso. É por meio do diálogo com a literatura, da reflexão compartilhada e da aproximação entre teoria e prática que ampliamos nosso olhar para as experiências que chegam à clínica.",
+        "Estudar a clínica com crianças e adolescentes possibilita compreender que ninguém se constitui isoladamente. As relações participam da construção das experiências, dos sentidos e das possibilidades de ser.",
+        "É a partir dessa compreensão que buscamos sustentar uma prática clínica atenta à singularidade de cada pessoa e aos contextos relacionais que atravessam sua existência.",
+        "Nosso convite é para que o estudo não se limite à busca por respostas, mas se torne abertura para novas perguntas, outros modos de compreender e possibilidades de encontro.",
+        "Tem sido incrível esse momento de trocas!!",
+        "Nosso espaço espera por você: um lugar para cuidar de quem cuida. Conheça o [Universo da Criança e do Adolescente](https://forms.gle/Whnjo4TemDSW9CJDA).",
+        "Com carinho,\nHanna Luiza e Lilian Tarabal",
+      ],
+      info: [
+        { label: "Grupo", valor: "Universo da Criança e do Adolescente" },
+        { label: "Proposta", valor: "Supervisão Clínica e Estudos em Abordagem Centrada na Pessoa" },
+        { label: "Onde", valor: "Online" },
+        { label: "Facilitação", valor: "Hanna Luiza e Lilian Tarabal" },
+      ],
+    },
+  },
+  {
+    id: "8",
+    data: "26 Fev 2027",
+    mes: "Fevereiro 2027",
+    origem: "Sala de Estudos",
+    origemSlug: "sala-de-estudos",
+    topicoSlug: "cursos-e-minicursos",
+    titulo: "Formação em Abordagem Centrada na Pessoa | Turma 2027–2028",
+    atual: true,
+    destaque: true,
+    imagem: "/evento8.jpeg",
+    descricao:
+      "Um percurso de estudo, experiência e encontro: proposta teórico-vivencial que articula os fundamentos da Abordagem Centrada na Pessoa, a reflexão sobre a prática clínica e a pessoa do profissional. Presencial em Belo Horizonte, com atividades on-line complementares.",
+    local: "Belo Horizonte",
+    inscricaoLink: "https://forms.gle/MGVYFBEqSt4V58Pq8",
+    detalhes: {
+      conteudo: [
+        "Na Sala de Estudos da Casa ACP, nosso Curso de Formação acontece como um percurso de estudo, experiência e encontro.",
+        "Nossa proposta teórico-vivencial articula os fundamentos da Abordagem Centrada na Pessoa, a reflexão sobre a prática clínica e experiências significativas de aprendizagem, valorizando também a pessoa do profissional.",
+        "Com início em 26 de fevereiro de 2027, o curso acontecerá presencialmente em Belo Horizonte, com atividades on-line complementares.",
+        "## As inscrições estão abertas!",
+        "Conheça nossa proposta e, se este percurso faz sentido para você, será uma alegria receber sua inscrição. [Acesse o formulário de inscrição](https://forms.gle/MGVYFBEqSt4V58Pq8).",
+        "Para mais informações:\nWhatsApp: [(31) 99633-0001](https://wa.me/5531996330001)\nE-mail: [casaacpformacao@gmail.com](mailto:casaacpformacao@gmail.com)",
+      ],
+      info: [
+        { label: "Início", valor: "26 de fevereiro de 2027" },
+        { label: "Turma", valor: "2027–2028" },
+        { label: "Onde", valor: "Presencial em Belo Horizonte, com atividades on-line complementares" },
+        { label: "Contato", valor: "(31) 99633-0001 · casaacpformacao@gmail.com" },
+      ],
+    },
+  },
 ];
 
 // Texto de data exibido nos cards e na página de detalhe do evento.
@@ -258,4 +374,23 @@ function timestampDoEvento(data?: string): number {
 // Todos os eventos, ordenados cronologicamente.
 export function agendaOrdenadaPorData(): AgendaEvento[] {
   return [...AGENDA].sort((a, b) => timestampDoEvento(a.data) - timestampDoEvento(b.data));
+}
+
+// Eventos atuais (marcados com `atual`), em ordem cronológica.
+export function agendaAtual(): AgendaEvento[] {
+  return agendaOrdenadaPorData().filter((evento) => evento.atual);
+}
+
+// Eventos atuais para a Varanda (página inicial e cômodo): os em destaque primeiro,
+// depois os demais em ordem cronológica.
+export function agendaAtualComDestaque(): AgendaEvento[] {
+  const atuais = agendaAtual();
+  return [...atuais.filter((evento) => evento.destaque), ...atuais.filter((evento) => !evento.destaque)];
+}
+
+// Eventos que já passaram, do mais recente para o mais antigo.
+export function agendaPassada(): AgendaEvento[] {
+  return agendaOrdenadaPorData()
+    .filter((evento) => !evento.atual)
+    .reverse();
 }

@@ -2,11 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, ArrowRight, ExternalLink } from "lucide-react";
-import { agendaOrdenadaPorData, rotuloDeData } from "@/lib/agenda";
+import { ArrowLeft, Calendar, MapPin, ArrowRight, ExternalLink, ChevronDown } from "lucide-react";
+import { agendaAtualComDestaque, agendaPassada, rotuloDeData, type AgendaEvento } from "@/lib/agenda";
 
-const AGENDA = agendaOrdenadaPorData();
+const ATUAIS = agendaAtualComDestaque();
+const PASSADOS = agendaPassada();
+// Quantos eventos passados aparecem de início, e quantos a mais a cada "Ver mais".
+const PASSADOS_POR_VEZ = 4;
 
 export default function VarandaPage() {
   return (
@@ -86,104 +90,150 @@ export default function VarandaPage() {
           </div>
         </motion.section>
 
-        {/* ── Grade de Notícias e Agenda ── */}
-        <motion.section 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-1 gap-8 md:grid-cols-2"
-        >
-          {AGENDA.map((noticia, index) => (
-            <motion.div
-              key={noticia.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              // Card no padrão dos outros cômodos
-              className="group flex flex-col overflow-hidden rounded-3xl bg-white border border-marrom/5 shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
-            >
-              {/* Cartaz do evento, quando houver */}
-              {noticia.imagem && (
-                <div className="relative aspect-video w-full">
-                  <Image
-                    src={noticia.imagem}
-                    alt={noticia.titulo}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    style={{ objectPosition: noticia.imagemPosicao }}
-                    className="object-cover"
-                  />
-                </div>
-              )}
+        {/* ── Acontecendo agora ── */}
+        <SecaoDaAgenda titulo="Acontecendo agora" eventos={ATUAIS} />
 
-              <div className="flex flex-1 flex-col p-8">
-                <div className="mb-6 flex items-center justify-between border-b border-marrom/10 pb-4">
-                  {/* Data em Terracota */}
-                  <div className="flex items-center gap-2 font-lato text-sm font-bold text-terracota">
-                    <Calendar className="h-4 w-4" />
-                    <span>{rotuloDeData(noticia)}</span>
-                  </div>
-                  {/* Badge do Cômodo de Origem */}
-                  <div className="rounded-full bg-marrom/5 px-3 py-1 font-lato text-[10px] font-bold uppercase tracking-widest text-marrom/60">
-                    {noticia.origem}
-                  </div>
-                </div>
-
-                {/* Título em Playfair */}
-                <h3 className="mb-4 font-playfair text-2xl text-marrom transition-colors group-hover:text-terracota">
-                  {noticia.titulo}
-                </h3>
-
-                {/* Texto em Marrom */}
-                <p className="mb-8 font-lato text-base leading-relaxed text-marrom/80 flex-1">
-                  {noticia.descricao}
-                </p>
-
-                <div className="mb-6 flex flex-wrap items-center gap-4">
-                  {noticia.inscricaoLink && (
-                    <a
-                      href={noticia.inscricaoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex w-fit items-center gap-2 rounded-full bg-terracota px-5 py-2.5 font-lato text-sm font-semibold text-white transition-colors hover:bg-terracota/90"
-                    >
-                      {noticia.inscricaoLinkLabel ?? "Realizar inscrição"}
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  )}
-
-                  {noticia.detalhes && (
-                    <Link
-                      href={`/comodos/varanda/agenda/${noticia.id}`}
-                      className="inline-flex w-fit items-center gap-2 font-lato text-sm font-semibold text-terracota transition-all hover:gap-3"
-                    >
-                      Saiba mais
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  )}
-                </div>
-
-                <div className="mt-auto flex items-center justify-between pt-4">
-                  <div className="flex items-center gap-2 font-lato text-xs font-medium text-marrom/60">
-                    <MapPin className="h-4 w-4" />
-                    <span>{noticia.local}</span>
-                  </div>
-                  <Link
-                    href={noticia.detalhes ? `/comodos/varanda/agenda/${noticia.id}` : `/comodos/${noticia.origemSlug}`}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-marrom/5 text-marrom transition-all group-hover:bg-terracota group-hover:text-white"
-                    aria-label={noticia.detalhes ? `Ver detalhes do evento ${noticia.titulo}` : `Ver o cômodo ${noticia.origem}`}
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.section>
+        {/* ── Já passaram ── */}
+        {PASSADOS.length > 0 && (
+          <SecaoDaAgenda titulo="Já aconteceu" eventos={PASSADOS} porVez={PASSADOS_POR_VEZ} className="mt-24" />
+        )}
 
       </div>
     </main>
+  );
+}
+
+// Grade de cards de eventos da Varanda, com título de seção.
+// Com `porVez`, mostra os eventos aos poucos, com um botão "Ver mais".
+function SecaoDaAgenda({
+  titulo,
+  eventos,
+  porVez,
+  className = "",
+}: {
+  titulo: string;
+  eventos: AgendaEvento[];
+  porVez?: number;
+  className?: string;
+}) {
+  const [quantidade, setQuantidade] = useState(porVez ?? eventos.length);
+  const visiveis = eventos.slice(0, quantidade);
+
+  return (
+    <section className={className}>
+      <div className="mb-10 flex flex-col items-center text-center">
+        <h2 className="font-playfair text-3xl text-marrom md:text-4xl">{titulo}</h2>
+        <div className="mt-6 h-[1px] w-16 bg-terracota/40"></div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="grid grid-cols-1 gap-8 md:grid-cols-2"
+      >
+        {visiveis.map((noticia, index) => (
+          <motion.div
+            key={noticia.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            // Card no padrão dos outros cômodos
+            className="group flex flex-col overflow-hidden rounded-3xl bg-white border border-marrom/5 shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
+          >
+            {/* Cartaz do evento, quando houver */}
+            {noticia.imagem && (
+              <div className="relative aspect-video w-full">
+                <Image
+                  src={noticia.imagem}
+                  alt={noticia.titulo}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  style={{ objectPosition: noticia.imagemPosicao }}
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            <div className="flex flex-1 flex-col p-8">
+              <div className="mb-6 flex items-center justify-between border-b border-marrom/10 pb-4">
+                {/* Data em Terracota */}
+                <div className="flex items-center gap-2 font-lato text-sm font-bold text-terracota">
+                  <Calendar className="h-4 w-4" />
+                  <span>{rotuloDeData(noticia)}</span>
+                </div>
+                {/* Badge do Cômodo de Origem */}
+                <div className="rounded-full bg-marrom/5 px-3 py-1 font-lato text-[10px] font-bold uppercase tracking-widest text-marrom/60">
+                  {noticia.origem}
+                </div>
+              </div>
+
+              {/* Título em Playfair */}
+              <h3 className="mb-4 font-playfair text-2xl text-marrom transition-colors group-hover:text-terracota">
+                {noticia.titulo}
+              </h3>
+
+              {/* Texto em Marrom */}
+              <p className="mb-8 font-lato text-base leading-relaxed text-marrom/80 flex-1">
+                {noticia.descricao}
+              </p>
+
+              <div className="mb-6 flex flex-wrap items-center gap-4">
+                {noticia.inscricaoLink && (
+                  <a
+                    href={noticia.inscricaoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-fit items-center gap-2 rounded-full bg-terracota px-5 py-2.5 font-lato text-sm font-semibold text-white transition-colors hover:bg-terracota/90"
+                  >
+                    {noticia.inscricaoLinkLabel ?? "Realizar inscrição"}
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                )}
+
+                {noticia.detalhes && (
+                  <Link
+                    href={`/comodos/varanda/agenda/${noticia.id}`}
+                    className="inline-flex w-fit items-center gap-2 font-lato text-sm font-semibold text-terracota transition-all hover:gap-3"
+                  >
+                    Saiba mais
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
+              </div>
+
+              <div className="mt-auto flex items-center justify-between pt-4">
+                <div className="flex items-center gap-2 font-lato text-xs font-medium text-marrom/60">
+                  <MapPin className="h-4 w-4" />
+                  <span>{noticia.local}</span>
+                </div>
+                <Link
+                  href={noticia.detalhes ? `/comodos/varanda/agenda/${noticia.id}` : `/comodos/${noticia.origemSlug}`}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-marrom/5 text-marrom transition-all group-hover:bg-terracota group-hover:text-white"
+                  aria-label={noticia.detalhes ? `Ver detalhes do evento ${noticia.titulo}` : `Ver o cômodo ${noticia.origem}`}
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {porVez && quantidade < eventos.length && (
+        <div className="mt-12 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setQuantidade((atual) => atual + porVez)}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-terracota/40 bg-transparent px-8 py-3.5 font-lato text-sm font-medium text-terracota transition-all duration-300 hover:-translate-y-1 hover:border-terracota hover:bg-terracota/5 hover:shadow-sm"
+          >
+            Ver mais ({eventos.length - quantidade})
+            <ChevronDown className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+    </section>
   );
 }

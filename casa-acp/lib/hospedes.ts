@@ -56,6 +56,19 @@ export const HOSPEDES: Hospede[] = [
     resumo:
       "Psicóloga pela Newton Paiva, formada na Abordagem Centrada na Pessoa (CPH Minas) e Focusing Trainer pelo The International Focusing Institute. Atende adultos e idosos.",
   },
+  {
+    id: "bruno",
+    nome: "Bruno Martins",
+    titulo: "Psicólogo • Mestre em Psicologia • Docente da PUC Minas",
+    periodo: "Outubro de 2026",
+    inicio: "2026-10",
+    foto: "/Bruno.webp",
+    bio: [
+      "Bruno Martins é pai do Saulo. Psicólogo (CRP 04/38519). Especialista em Psicoterapia Humanista Fenomenológica Existencial pela FUMEC. Mestre em Psicologia pela UFMG. Docente de Psicologia da PUC Minas. Focusing Trainer (Focalização), certificado pelo Instituto Brasileiro de Focusing.",
+    ],
+    resumo:
+      "Psicólogo, mestre em Psicologia pela UFMG e docente da PUC Minas. Especialista em Psicoterapia Humanista Fenomenológica Existencial (FUMEC) e Focusing Trainer.",
+  },
 ];
 
 export function getHospedePorId(id: string): Hospede | undefined {
