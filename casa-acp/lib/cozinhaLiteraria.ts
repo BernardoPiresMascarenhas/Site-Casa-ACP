@@ -271,6 +271,27 @@ export const ARTIGOS: Artigo[] = [
       "STOCKINGER, R. C. Psicoterapia centrada na pessoa do trabalhador. In: COPPE, A. A. F. Abordagem Centrada na Pessoa: Práticas e Reflexões. 1 ed. Porto Alegre: Nova Práxis Editorial, 2026. 134-164.",
     ],
   },
+  {
+    id: "15",
+    titulo: "Escuta fluvial",
+    categoria: "Clínica Viva",
+    autores: [DALISSA],
+    data: "18 Nov 2026",
+    resumo: "Uma escuta que acompanha o movimento de quem está diante de nós, navegando junto, sem a necessidade de racionalizar cada palavra ou organizar em caixas aquilo que está sendo vivido.",
+    conteudo: [
+      "Ontem participei de um encontro em homenagem aos 70 anos de Grande Sertão: Veredas, de Guimarães Rosa. Uma professora de literatura da PUC Minas nos conduziu por uma conversa muito bonita sobre a obra, fazendo uma costura entre o sertão de fora e o de dentro, com seus caminhos, travessias e tantas paisagens conhecidas e desconhecidas que habitam cada um de nós.",
+      "Em determinado momento, durante essa prosa prazerosa e provocativa, ela trouxe uma expressão que me chamou muito a atenção: leitura fluvial. E então foi explicando que \"ler fluvialmente\" é não interromper o fluxo da leitura para buscar o significado das palavras no dicionário, tentar decifrar uma expressão ou encontrar uma compreensão imediata. Disse que, para vivenciar a leitura rosiana de maneira profunda, seria necessário confiar que, em algum momento, o sentido do texto poderia chegar, talvez até de uma maneira diferente daquela que esperávamos.",
+      "Esse fluir na leitura, como se estivesse seguindo o curso de um rio, contemplando as paisagens e simplesmente confiando no que elas podem desvelar, me colocou em contato com algumas nuances da escuta psicoterapêutica que acredito fazerem parte do que chamarei de uma \"escuta fluvial\".",
+      "Uma escuta fluvial seria aquela que consegue acompanhar o movimento de quem está diante de nós, navegando junto, sem a necessidade de racionalizar cada palavra ou expressão, nem de organizar em caixas aquilo que está sendo vivido.",
+      "Nem sempre quem fala consegue nomear o que sente ou mesmo reconhecer aquilo de que está se aproximando. Às vezes, a experiência chega confusa, contraditória, fragmentada. A fala e os silêncios vão tomando caminhos inesperados, por vezes desconhecidos, retornam a lugares já visitados, parecem se perder e, de repente, algo que até então não havia sido percebido começa a ganhar forma.",
+      "E nós, psicoterapeutas, aprendizes de timoneiro, podemos cultivar essa escuta atenta, delicada e aberta ao fluir que vem do outro. Confiando na capacidade da pessoa de encontrar, no seu próprio tempo, os caminhos que lhe fazem sentido. Mesmo quando as águas parecem turvas, agitadas, o rumo ainda não está claro ou a travessia exige passar por lugares que talvez ela desejasse evitar...",
+      "Mas confiar também exige de nós certa coragem, não é mesmo?",
+      "A coragem de permanecer quando ainda não compreendemos muito bem o que está acontecendo. De não nos apressarmos em oferecer uma direção, uma pergunta ou uma explicação. De acolher o que chega, como chega, sem exigir que a experiência se apresente de maneira organizada para que possa ser recebida.",
+      "E talvez seja justamente isso que Riobaldo nos sugere, em Grande Sertão: Veredas, quando diz: \"o senhor escute, me escute mais do que eu estou dizendo; e escute desarmado.\" Que bonito pensar numa escuta que possa alcançar, de maneira desarmada, aquilo que ainda não encontrou palavras! Que reconheça nos silêncios um movimento tão vivo quanto a fala, pois o rio não deixa de correr quando não ouvimos o barulho das águas.",
+      "Num mundo tão apressado em compreender, explicar e responder, talvez estejamos perdendo um pouco da maleabilidade de simplesmente estar com alguém. Escutar com o corpo inteiro, sem deixar que a pressa de encontrar sentidos nos afaste da experiência que acontece ali, diante de nós. Não estou sugerindo que abandonemos o conhecimento ou a reflexão, mas que saibamos reservar a ambos o espaço justo e necessário em nosso existir.",
+      "Saí daquela prosa levando comigo esse convite. Quero me permitir escutar de maneira cada vez mais fluvial, na clínica, nas minhas relações e na vida! Menos preocupada em antecipar a chegada, mais disponível para acompanhar o curso das águas, suas curvas, seus silêncios e suas correntezas. Afinal, talvez a beleza de uma travessia esteja também em descobrir que nem tudo precisa ser compreendido antes de ser vivido.",
+    ],
+  },
 ];
 
 export function getArtigoPorId(id: string): Artigo | undefined {
