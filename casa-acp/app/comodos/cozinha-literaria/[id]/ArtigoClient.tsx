@@ -1,10 +1,24 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar } from "lucide-react";
 import { getArtigoPorId, nomesAutores } from "@/lib/cozinhaLiteraria";
+
+// Marcações inline: **negrito** e *itálico* (ex.: títulos de obras).
+function renderInline(texto: string): ReactNode[] {
+  return texto.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((parte, i) => {
+    if (parte.startsWith("**") && parte.endsWith("**") && parte.length > 4) {
+      return <strong key={i} className="font-black text-marrom">{parte.slice(2, -2)}</strong>;
+    }
+    if (parte.startsWith("*") && parte.endsWith("*") && parte.length > 2) {
+      return <em key={i}>{parte.slice(1, -1)}</em>;
+    }
+    return parte;
+  });
+}
 
 export default function ArtigoPage() {
   const params = useParams();
@@ -112,7 +126,7 @@ export default function ArtigoPage() {
               // 4. Parágrafo padrão
               return (
                 <p key={i} className="mb-6">
-                  {paragrafo}
+                  {renderInline(paragrafo)}
                 </p>
               );
             })}
