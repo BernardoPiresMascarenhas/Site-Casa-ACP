@@ -76,6 +76,13 @@ arquivos pesados não entrem no repositório por engano.
 
 ### 3A. Se a produção continuar na Vercel
 
+**Em uso desde 26/11/2026:** Blob store `casa-acp-downloads` (público, região `gru1`),
+ligado ao projeto `site-casa-acp`. Variável em Production e Preview:
+`NEXT_PUBLIC_PRESENTES_2027_DOWNLOADS_URL=https://i38lxrojt9ommk6j.public.blob.vercel-storage.com/presentes-2027`.
+Para (re)enviar arquivos: `node --env-file=.env.local scripts/enviar-presentes-2027-blob.mjs`
+(o `BLOB_READ_WRITE_TOKEN` vem de `npx vercel env pull`). Os links ganham
+`?download=1` automaticamente, porque o atributo `download` não vale entre domínios.
+
 Opção recomendada: **Vercel Blob** (ou outro storage com CDN, como Cloudflare R2).
 1. Envie os 9 arquivos com os nomes exatos da tabela, com leitura pública.
 2. Configure em *Project → Settings → Environment Variables* (Production):

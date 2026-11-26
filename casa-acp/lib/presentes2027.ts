@@ -73,7 +73,10 @@ export type Material = {
 };
 
 export function urlDoArquivo(arquivo: Arquivo): string {
-  return `${DOWNLOADS_BASE_URL}/${arquivo.nomeArquivo}`;
+  const url = `${DOWNLOADS_BASE_URL}/${arquivo.nomeArquivo}`;
+  // Em outro domínio (Vercel Blob), o navegador ignora o atributo `download`.
+  // O `?download=1` faz o Blob responder com Content-Disposition: attachment.
+  return /^https?:\/\//.test(DOWNLOADS_BASE_URL) ? `${url}?download=1` : url;
 }
 
 /** Tamanho legível em pt-BR, no mesmo padrão exibido pelo Windows/macOS. */
