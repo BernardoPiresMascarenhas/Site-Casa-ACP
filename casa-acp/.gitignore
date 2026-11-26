@@ -45,3 +45,7 @@ next-env.d.ts
 
 # pacotes de deploy (contem .env.local com a chave da API)
 *.zip
+
+# Campanha 2027: os PDFs/PPTX ficam fora do repositório (ver docs/presentes-2027.md).
+# Proteção caso alguém copie os arquivos para public/ durante testes.
+/public/downloads/
